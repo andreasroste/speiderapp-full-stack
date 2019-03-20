@@ -1,0 +1,16 @@
+{
+  "login": "Logg inn",
+  "member_no_or_email": "Medlemsnummer eller e-postadresse",
+  "forgot_password": "Glemt passord",
+  "password": "Passord",
+  "an_error_happened": "En feil oppsto",
+  "wrong_password": "Feil passord",
+  "profile": "Profil",
+  "name": "Navn",
+  "groups": "Speidergrupper",
+  "roles": "Roller",
+  "home": "Hjem",
+  "group": "Gruppe",
+  "events": "Arrangementer",
+  "logout": "Logg ut"
+}
