@@ -20,7 +20,7 @@
 			<a href="https://min.speiding.no/request_password" class="gp">{{ $t('forgot_password') }}</a>
 			<input type="submit" class="submit" :disabled="button_disabled" :value="$t('login')">
 		</form>
-		<v-btn block class="blispeider" href="https://blispeider.no">Vil du finne informasjon om speiding, eller bli en selv?</v-btn>
+		<v-btn block flat class="blispeider" href="https://blispeider.no">Vil du finne informasjon om speiding, eller bli en selv?</v-btn>
 	</div>
 </template>
 
@@ -43,6 +43,7 @@
 		width: 75vw;
 		margin: 10px auto;
 		margin-top: 10vh;
+		word-wrap: break-word;
 	}
 
 	a.gp {
