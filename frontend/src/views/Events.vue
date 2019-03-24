@@ -2,6 +2,7 @@
 	<v-container>
 		<div>
 			<h1>Arrangementer</h1>
+			<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
 			<br>
 			<div class="events">
 				<Event
@@ -31,7 +32,8 @@
 		},
 		data: () => {
 			return {
-				events: {}
+				events: {},
+				loading: true
 			};
 		},
 		methods: {
@@ -39,8 +41,10 @@
 				const vm = this;
 				axios.get("/api/events").then(response => {
                     sessionStorage.setItem('speiding_no_events', JSON.stringify(response.data))
-                    vm.events = response.data;
+					vm.events = response.data;
+					vm.loading = false;
                 }).catch(() => {
+					vm.loading = false;
                     vm.$notify({
                         group: "varsel",
                         title: "En feil oppsto",
@@ -52,6 +56,7 @@
 		created() {
 			const events = sessionStorage.getItem("speiding_no_events");
 			if (events) {
+				this.loading = false;
 				this.events = JSON.parse(events);
 			} else {
 				this.getEvents();
