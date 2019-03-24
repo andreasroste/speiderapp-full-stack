@@ -6,5 +6,11 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: false
     }
+  },
+
+  pwa: {
+    name: 'Speiderapp',
+    themeColor: '#596578',
+    msTileColor: '#596578'
   }
 }
