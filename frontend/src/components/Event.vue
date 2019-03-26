@@ -17,7 +17,7 @@
         </v-card-title>
 
         <v-card-actions>
-          <v-btn :href="registration" flat color="#4d647c">Gå til påmelding</v-btn>
+          <v-btn :href="registration" target="_blank" flat color="#4d647c">Gå til påmelding</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>

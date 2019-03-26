@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+var rollbar = require('./helpers/rollbar') // Logger
+
+
 // Middleware
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -34,6 +37,6 @@ app.post('/login', loginController)
 app.get('/events', speidingnoeventsController)
 
 
-
+app.use(rollbar.errorHandler()) // Handling errors
 
 module.exports = app

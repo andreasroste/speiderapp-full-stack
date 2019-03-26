@@ -1,13 +1,11 @@
 <template>
     <div>
-        <h1>Gruppe</h1>
-        <v-card>
-            {{user_memberships}}
-        </v-card>
-        <v-card>
-            <v-card-title>Dine roller for denne gruppa</v-card-title>
+        <v-card v-for="(group, id) in roles_per_group" :key="id">
+            <v-card-title><h3 class="headline">{{group.group_name}}</h3></v-card-title>
             <v-card-text>
-                {{roles}}
+                <ul>
+                    <li v-for="(role, id) in group" :key="id">{{role}}</li>
+                </ul>
             </v-card-text>
         </v-card>
     </div>
@@ -20,25 +18,27 @@ import { mapGetters } from 'vuex'
 export default {
     computed: {
         ...mapGetters(['user_memberships', 'user_role_ids']),
-        roles() {
-            let memberships = this.user_memberships
-            let all_roles = this.user_role_ids
+        roles_per_group() {
+            let memberships = this.user_memberships // Gets the user's memberships
+            let all_roles = this.user_role_ids  // Gets all of the user's roles
 
-            let roles_per_membership = []
+            let result = {}
 
-            for(const membership_id in memberships){
-                let membership = membersips[membership_id]
-                let these_roles = all_roles.find((obj) => {
-                    if(obj['body_id'] == membership['group_no']){
-                        return true
-                    }else{
-                        return false
-                    }
+            memberships.map((membership) => {   // Loops through the memberships
+                result[membership['group_no']] = []
+                result[membership['group_no']]['group_name'] = membership['name']
+
+                let roles_in_membership = all_roles.filter((role) => {  // Filters all the user's roles to only the roles that is connected to the membership
+                    return role['body_id'] == membership['group_no'] ? true : false
                 })
-                roles_per_membership.push({group_no: membership['group_no'], roles: these_roles})
-            }
 
-            return roles_per_membership
+                roles_in_membership.map((role) => { // Loops through the filtered roles
+                    result[role['body_id']].push(role['roleid'])    // Adds role id to group property on result
+                })
+            })
+
+
+            return result
         }
     }
 }
