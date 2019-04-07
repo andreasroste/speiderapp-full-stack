@@ -1,27 +1,24 @@
 <template>
-  <v-layout>
-    <v-flex>
-      <v-card>
-        <v-img
-          :src="img_url"
-          aspect-ratio="3.236"
-        ></v-img>
-
-        <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">{{title}}</h3>
-						<v-icon>date_range</v-icon> {{formatDate(start_date, end_date)}}<br>
-						<v-icon>location_on</v-icon> {{position}}
-            <div class="desc"> {{ desc }} </div>
-          </div>
-        </v-card-title>
-
-        <v-card-actions>
-          <v-btn :href="registration" target="_blank" flat color="#4d647c">Gå til påmelding</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+	<div class="event">
+		<div class="flex event-meta">
+			<div class="event-name">{{ title }}</div>
+			<div class="event-date">{{ formatDate(start_date, end_date) }}</div>
+		</div>
+		<div class="flex flex-dir">
+			<div class="event-box border-default">
+				<div class="flex">
+					<img :src="img_url" v-if="img_url != ''" class="event-image">
+					<span class="event-desc">{{ desc }}</span>
+				</div>
+				<div class="dots">
+					<div v-if="age_groups.includes('7394')" class="dot bg-smaspeider"></div>
+					<div v-if="age_groups.includes('7278')" class="dot bg-vandrer"></div>
+					<div v-if="age_groups.includes('7395')" class="dot bg-rover"></div>
+					<div v-if="age_groups.includes('7277')" class="dot bg-leder"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -34,14 +31,15 @@
 			"end_date",
 			"registration",
 			"position",
-			"img_url"
+			"img_url",
+			"age_groups"
 		],
 		methods: {
 			formatDate(start, end) {
 				const start_date = new Date(start);
 				const end_date = new Date(end);
 
-				if(start == '') {
+				if (start == "") {
 					return (
 						end_date.getDate() +
 						". " +
@@ -51,7 +49,7 @@
 					); // Samme dag.
 				}
 
-				if (end == ""){
+				if (end == "") {
 					return (
 						start_date.getDate() +
 						". " +
@@ -110,7 +108,7 @@
 				}
 			},
 			nor_month(month) {
-				let translated_month = '';
+				let translated_month = "";
 
 				switch (month) {
 					case 0:
@@ -163,10 +161,63 @@
 
 
 <style scoped>
-	.v-card {
-		margin-bottom: 30px;
+	.flex {
+		display: flex;
 	}
-	.desc {
-		margin-top: 20px;
+	.flex-dir {
+		flex-direction: column;
+	}
+	.event {
+		margin-bottom: 15px;
+	}
+	.event-name {
+		display: inline-block;
+		font-weight: bold;
+		flex: 1;
+		margin-right: 5px;
+		font-size: 15px;
+		line-height: 1.2;
+	}
+	.event-date {
+		display: inline-block;
+		font-size: 15px;
+	}
+	.event-meta {
+		margin-bottom: 5px;
+	}
+	.event-image {
+		border-radius: 10px;
+		width: 90px;
+		height: 90px;
+		margin-right: 5px;
+		object-fit: cover;
+	}
+	.event-desc {
+		flex: 1;
+		word-break: normal;
+		font-size: 15px;
+	}
+	.event-box {
+		background: rgba(255, 255, 255, 0.5);
+		border: 1px solid black;
+		border-radius: 20px;
+		padding: 10px;
+		padding-bottom: 25px;
+		position: relative;
+		width: 100%;
+	}
+	.dots {
+		display: flex;
+		bottom: 0;
+		right: 10px;
+		position: absolute;
+	}
+	.dot {
+		display: block;
+		width: 15px;
+		height: 15px;
+		margin-bottom: 5px;
+		margin-right: 5px;
+		border-radius: 40%;
 	}
 </style>

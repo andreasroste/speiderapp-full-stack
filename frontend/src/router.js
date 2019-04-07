@@ -41,6 +41,15 @@ export default new Router({
       }
     },
     {
+      path: '/events/create',
+      name: 'create_event',
+      component: () => import('./views/Events_add.vue'),
+      meta: {
+        name: 'create_event',
+        navbar: false
+      }
+    },
+    {
       path:'/logout',
       name: 'logout',
       component: () => import('./views/Logout.vue'),

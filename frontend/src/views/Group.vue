@@ -1,7 +1,9 @@
 <template>
     <div>
+        <h1>Gruppe</h1>
         <v-card v-for="(group, id) in roles_per_group" :key="id">
-            <v-card-title><h3 class="headline">{{group.group_name}}</h3></v-card-title>
+            {{group.group_name}}
+            <v-card-title><h3 class="headline">Roller</h3></v-card-title>
             <v-card-text>
                 <ul>
                     <li v-for="(role, id) in group" :key="id">{{role}}</li>

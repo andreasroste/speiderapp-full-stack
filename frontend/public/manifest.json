@@ -3,8 +3,13 @@
   "short_name": "Speiderapp",
   "icons": [
     {
-      "src": "./logo.png",
+      "src": "./logos/192x192-blaa.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./logos/512x512-blaa.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],

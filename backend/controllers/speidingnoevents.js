@@ -51,6 +51,17 @@ async function make_events_request(node_ids) {
     for (const event in events) {
         if (events.hasOwnProperty(event)) {
             const element = events[event];
+            let age_groups = [];
+
+            if(element.hasOwnProperty('field_age_group')){
+                for(age_id in element.field_age_group){
+                    const age_group = element.field_age_group[age_id] || null;
+                    if(age_group && age_group.hasOwnProperty('id')){
+                        age_groups.push(age_group.id['0'].value);
+                    }
+                }
+            }
+
             const relevant_event_info = {
                 id: (typeof element.id["0"] === 'undefined') ? 0 : element.id["0"].value,
                 title: (typeof element.title["0"] === 'undefined') ? '' : element.title["0"].value,
@@ -60,7 +71,8 @@ async function make_events_request(node_ids) {
                 body: (typeof element.field_body["0"] === 'undefined') ? '' : element.field_body["0"].processed,
                 desc: (typeof element.field_desc["0"] === 'undefined') ? '' : element.field_desc["0"].value,
                 img_url: (typeof element.field_image["0"] === 'undefined' || typeof element.field_image["0"].path["0"] === 'undefined') ? '' : element.field_image["0"].path["0"].url,
-                registration: (typeof element.field_event_registration["0"] === 'undefined') ? '' : element.field_event_registration["0"].url
+                registration: (typeof element.field_event_registration["0"] === 'undefined') ? '' : element.field_event_registration["0"].url,
+                age_groups
             }
             final_events.push(relevant_event_info);
         }
