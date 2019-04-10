@@ -1,6 +1,6 @@
 <template>
 		<div class="page">
-			<v-btn absolute top left fab id="filter_btn" color="blue"><v-icon>menu</v-icon></v-btn>
+			<v-btn absolute top left fab id="filter_btn"><v-icon>menu</v-icon></v-btn>
 			<h1>Arrangementer</h1>
 			<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
 			<br>
@@ -94,6 +94,18 @@
                         text: "Jeg klarte ikke å hente info fra speiding.no :("
                     });
                 });
+			},
+			gotoEvent(event) {
+				this.$store.commit({
+					name: event.title,
+					location: event.position,
+					fee: event.fee,
+					image_url: event.img_url,
+					desc: event.desc,
+					body: event.body,
+					registration_link: event.registration
+				});
+				this.$router.push('/events/view');
 			}
 		},
 		created() {

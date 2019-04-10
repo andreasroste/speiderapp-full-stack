@@ -1,7 +1,7 @@
 <template>
 	<div class="event">
 		<div class="flex event-meta">
-			<div class="event-name">{{ title }}</div>
+			<a class="event-name" @click.prevent="gotoEvent(event)">{{ title }}</a>
 			<div class="event-date">{{ formatDate(start_date, end_date) }}</div>
 		</div>
 		<div class="flex flex-dir">

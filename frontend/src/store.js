@@ -10,7 +10,8 @@ export default new Vuex.Store({
     auth_status: '',
     token: localStorage.getItem('token') || '',
     user: {},
-    roles: {}
+    roles: {},
+    current_event: {}
   },
   mutations: {
     auth_request(state) {
@@ -33,6 +34,17 @@ export default new Vuex.Store({
       state.token = ''
       state.user = {}
       state.roles = {}
+    },
+    setCurrentEvent(state, {name, location, fee, image_url, desc, body, registration_link}){
+      state.current_event = {
+        name,
+        location,
+        fee,
+        image_url,
+        desc,
+        body,
+        registration_link
+      }
     }
 
   },
@@ -126,7 +138,8 @@ export default new Vuex.Store({
         }
       }
       return result
-    }
+    },
+    current_event: state => state.current_event
   },
   plugins: [createPersistedState()]
 })

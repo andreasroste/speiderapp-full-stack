@@ -50,6 +50,15 @@ export default new Router({
       }
     },
     {
+      path: '/events/view',
+      name:'view_event',
+      component: () => import('./views/Event_info.vue'),
+      meta: {
+        name: 'view_event',
+        navbar: false
+      }
+    },
+    {
       path:'/logout',
       name: 'logout',
       component: () => import('./views/Logout.vue'),
