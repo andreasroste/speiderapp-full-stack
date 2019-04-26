@@ -72,7 +72,8 @@ async function make_events_request(node_ids) {
                 desc: (typeof element.field_desc["0"] === 'undefined') ? '' : element.field_desc["0"].value,
                 img_url: (typeof element.field_image["0"] === 'undefined' || typeof element.field_image["0"].path["0"] === 'undefined') ? '' : element.field_image["0"].path["0"].url,
                 registration: (typeof element.field_event_registration["0"] === 'undefined') ? '' : element.field_event_registration["0"].url,
-                age_groups
+                age_groups,
+                fee: (typeof element.field_event_fee["0"] === 'undefined') ? '' : element.field_event_fee["0"].value
             }
             final_events.push(relevant_event_info);
         }

@@ -35,7 +35,7 @@ export default new Vuex.Store({
       state.user = {}
       state.roles = {}
     },
-    setCurrentEvent(state, {name, location, fee, image_url, desc, body, registration_link}){
+    setCurrentEvent(state, {name, location, fee, image_url, desc, body, registration_link, date}){
       state.current_event = {
         name,
         location,
@@ -43,7 +43,8 @@ export default new Vuex.Store({
         image_url,
         desc,
         body,
-        registration_link
+        registration_link,
+        date
       }
     }
 
@@ -82,6 +83,12 @@ export default new Vuex.Store({
         commit('logout')
         localStorage.removeItem('token')
         delete axios.defaults.headers.common['Authorization']
+        resolve()
+      })
+    },
+    gotoEvent({commit}, event) {
+      return new Promise((resolve) => {
+        commit('setCurrentEvent', event)
         resolve()
       })
     }
