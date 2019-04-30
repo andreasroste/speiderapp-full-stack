@@ -39,9 +39,9 @@ export default {
     font-family: 'DINOT';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* -webkit-user-select: none; */
-    /* -webkit-tap-highlight-color: transparent; */
-    /* -webkit-touch-callout: none; */
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
     transition: .3s ease-in-out;
   }
 
