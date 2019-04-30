@@ -74,6 +74,7 @@ export default {
   #approuter {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding-top: 26px;
     height: 100%;
   }
