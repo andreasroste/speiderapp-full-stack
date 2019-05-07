@@ -10,7 +10,7 @@
                 <br>
                 <div class="desc" v-if="current_event.desc">{{current_event.desc}}</div>
                 <br>
-                <div v-if="current_event.body">{{current_event.body | striphtml}}</div>
+                <div v-if="current_event.body" v-html="current_event.body"></div>
             </div>
             <v-btn v-if="current_event.registration_link" :href="current_event.registration_link" >Gå til påmelding</v-btn>
         </div>
@@ -24,14 +24,6 @@ import { mapGetters } from 'vuex';
 export default {
     computed: {
         ...mapGetters(['current_event'])
-    },
-    filters: {
-        striphtml(value) {
-            var div = document.createElement("div");
-            div.innerHTML = value;
-            var text = div.textContent || div.innerText || "";
-            return text;
-        }
     }
 }
 </script>
