@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="page">
+            <v-btn @click="$router.go(-1)" absolute top left fab id="back_btn"><v-icon>arrow_back</v-icon></v-btn>
             <v-img v-if="current_event.image_url" :src="current_event.image_url" aspect-ratio="1.618"></v-img>
             <div class="box">
                 <h2>{{ current_event.name }}</h2>
@@ -48,5 +49,10 @@ export default {
 		padding-bottom: 25px;
 		position: relative;
 		width: 100%;
+    }
+    #back_btn {
+        top: auto;
+		height: 47px;
+		width: 47px;
     }
 </style>

@@ -1,7 +1,9 @@
 <template>
 		<div class="page">
-			<v-btn absolute top left fab id="filter_btn"><v-icon>menu</v-icon></v-btn>
-			<h1>Arrangementer</h1>
+			<div class="page-header">
+				<v-btn fab id="filter_btn" @click="toggle_filter"><v-icon>menu</v-icon></v-btn>
+				<h1>Arrangementer</h1>
+			</div>
 			<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
 			<br>
 			<div class="events">
@@ -28,10 +30,18 @@
 <style scoped>
 	h1 {
 		text-align: center;
-		flex: 1;
+		margin: 0 auto;
+		width: 100%;
+		padding: 0;
+		display: inline-block;
 	}
 
 	.page {
+		position: relative;
+	}
+
+	.page-header{
+		padding: 5px;
 		position: relative;
 	}
 
@@ -43,8 +53,11 @@
 
 	#filter_btn {
 		top: auto;
-		height: 47px;
-		width: 47px;
+		height: 40px;
+		width: 40px;
+		display: inline-block;
+		margin: 0;
+		position: absolute;
 	}
 
 	.events {
@@ -58,9 +71,9 @@
 	}
 
 	@media screen and (max-width: 400px) {
-		h1 {
-			margin-left: 70px;
-		}
+		/* h1 {
+			font-size: 75%;
+		} */
 	}
 </style>
 
@@ -227,6 +240,9 @@
 				}
 
 				return translated_month;
+			},
+			toggle_filter() {
+				
 			}
 		},
 		created() {
