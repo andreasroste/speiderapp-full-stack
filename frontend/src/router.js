@@ -50,8 +50,8 @@ export default new Router({
       }
     },
     {
-      path: '/events/view',
-      name:'view_event',
+      path: '/events/:id',
+      name: 'view_event',
       component: () => import('./views/Event_info.vue'),
       meta: {
         name: 'view_event',

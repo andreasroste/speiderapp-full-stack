@@ -1,8 +1,30 @@
 <template>
 		<div class="page">
 			<div class="page-header">
-				<v-btn fab id="filter_btn" @click="toggle_filter"><v-icon>menu</v-icon></v-btn>
+				<v-btn @click="filtering = !filtering" fab id="filter_btn">
+					<v-icon v-if="!filtering">menu</v-icon>
+					<v-icon v-if="filtering">close</v-icon>
+				</v-btn>
 				<h1>Arrangementer</h1>
+			</div>
+			<div class="filtermenu" v-if="filtering">
+				<h3>TYPE</h3>
+				<div class="grid-3">
+					<div class="filtermenubutton">Gruppe</div>
+					<div class="filtermenubutton">Krets</div>
+					<div class="filtermenubutton">Nasjonalt</div>
+					<div class="filtermenubutton">Internasjonalt</div>
+					<div class="filtermenubutton">Annet</div>
+				</div>
+				<h3>ALDERSGRUPPE</h3>
+				<div class="grid-3">
+					<div class="filtermenubutton">Småspeider</div>
+					<div class="filtermenubutton">Stifinner</div>
+					<div class="filtermenubutton">Vandrer</div>
+					<div class="filtermenubutton">Rover</div>
+					<div class="filtermenubutton">Leder</div>
+					<div class="filtermenubutton">Annet</div>
+				</div>
 			</div>
 			<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
 			<br>
@@ -36,13 +58,18 @@
 		display: inline-block;
 	}
 
+	h3 {
+		margin-bottom: 10px;
+	}
+
 	.page {
 		position: relative;
 	}
 
 	.page-header{
 		padding: 5px;
-		position: relative;
+		z-index: 100;
+		width: 100%;
 	}
 
 	#new_event_btn {
@@ -69,6 +96,31 @@
 		display: flex;
 		padding: 0 15px;
 	}
+	.filtermenu {
+		width: 100%;
+		display: block;
+		background: #eee;
+		padding: 10px;
+		position: fixed;
+		top: 100px;
+		left: 0;
+		right: 0;
+		z-index: 10;
+	}
+	.filtermenubutton {
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.6);
+		border: 1px solid rgb(89, 101, 120);
+		text-align: center;
+		display: inline-block;
+	}
+	.grid-3 {
+		display: grid;
+		grid-gap: 5px;
+		grid-column-gap: 5px;
+		grid-template-columns: 33% 33% 33%;
+		margin-bottom: 20px;
+	}
 
 	@media screen and (max-width: 400px) {
 		/* h1 {
@@ -89,7 +141,8 @@
 		data: () => {
 			return {
 				events: {},
-				loading: true
+				loading: true,
+				filtering: false
 			};
 		},
 		methods: {
@@ -109,17 +162,17 @@
                 });
 			},
 			gotoEvent(event) {
-				this.$store.dispatch('gotoEvent', {
-					name: event.title,
-					location: event.position,
-					fee: event.fee,
-					image_url: event.img_url,
-					desc: event.desc,
-					body: event.body,
-					registration_link: event.registration,
-					date: this.formatDate(event.start_date, event.end_date)
-				});
-				this.$router.push('/events/view');
+				// this.$store.dispatch('gotoEvent', {
+				// 	name: event.title,
+				// 	location: event.position,
+				// 	fee: event.fee,
+				// 	image_url: event.img_url,
+				// 	desc: event,
+				// 	body: event.body,
+				// 	registration_link: event.registration,
+				// 	date: this.formatDate(event.start_date, event.end_date)
+				// });
+				this.$router.push('/events/' + event.id);
 			},
 			formatDate(start, end) {
 				const start_date = new Date(start);
@@ -240,9 +293,6 @@
 				}
 
 				return translated_month;
-			},
-			toggle_filter() {
-				
 			}
 		},
 		created() {

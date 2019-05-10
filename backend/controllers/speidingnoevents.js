@@ -65,15 +65,11 @@ async function make_events_request(node_ids) {
             const relevant_event_info = {
                 id: (typeof element.id["0"] === 'undefined') ? 0 : element.id["0"].value,
                 title: (typeof element.title["0"] === 'undefined') ? '' : element.title["0"].value,
-                position: (typeof element.field_address["0"] === 'undefined') ? '' : element.field_address["0"].value,
                 start_date: (typeof element.field_event_start_date["0"] === 'undefined') ? '' : new Date(element.field_event_start_date["0"].value),
                 end_date: (typeof element.field_event_end_date["0"] === 'undefined') ? '' : new Date(element.field_event_end_date["0"].value),
-                body: (typeof element.field_body["0"] === 'undefined') ? '' : element.field_body["0"].processed,
                 desc: (typeof element.field_desc["0"] === 'undefined') ? '' : element.field_desc["0"].value,
                 img_url: (typeof element.field_image["0"] === 'undefined' || typeof element.field_image["0"].path["0"] === 'undefined') ? '' : element.field_image["0"].path["0"].url,
-                registration: (typeof element.field_event_registration["0"] === 'undefined') ? '' : element.field_event_registration["0"].url,
                 age_groups,
-                fee: (typeof element.field_event_fee["0"] === 'undefined') ? '' : element.field_event_fee["0"].value
             }
             final_events.push(relevant_event_info);
         }
@@ -95,9 +91,9 @@ module.exports = async (req, res) => {
         if (events) {
             res.status(200).json(events);
         } else {
-            res.status(500).status({ error: 'get_events.js, make_events_request()' });
+            res.status(500).json({ error: 'get_events.js, make_events_request()' });
         }
     } else {
-        res.status(500).status({ error: 'get_events.js, make_id_request()' });
+        res.status(500).json({ error: 'get_events.js, make_id_request()' });
     }
 };

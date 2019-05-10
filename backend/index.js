@@ -28,15 +28,17 @@ app.use(function(req, res, next) {
 
 
 // Controllers
-const loginController = require('./controllers/login')
-const speidingnoeventsController = require('./controllers/speidingnoevents')
+const loginController = require('./controllers/login');
+const speidingnoeventsController = require('./controllers/speidingnoevents');
+const speidingnosingleeventController = require('./controllers/speidingnosingleevent');
 
 
 // Routes
-app.post('/login', loginController)
-app.get('/events', speidingnoeventsController)
+app.post('/login', loginController);
+app.get('/events', speidingnoeventsController);
+app.get('/event/:id', speidingnosingleeventController);
 
 
-app.use(rollbar.errorHandler()) // Handling errors
+//app.use(rollbar.errorHandler()) // Handling errors
 
 module.exports = app

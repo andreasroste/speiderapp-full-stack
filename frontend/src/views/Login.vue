@@ -22,7 +22,6 @@
 				<input type="submit" class="s-btn" :disabled="button_disabled" :value="$t('login')">
 			</form>
 		</div>
-
 	</div>
 </template>
 
@@ -35,7 +34,7 @@
 	.center {
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%,-50%);
+		transform: translate(-50%, -50%);
 		position: absolute;
 	}
 
@@ -46,7 +45,6 @@
 		position: absolute;
 		margin: 0;
 	}
-
 
 	.blispeider {
 		max-width: 500px;
@@ -78,7 +76,7 @@
 		border-radius: 30px;
 		padding: 10px;
 		width: 60vw;
-		background: rgba(255,255,255,0.6);
+		background: rgba(255, 255, 255, 0.6);
 		max-width: 500px;
 		margin: 10px auto;
 		display: block;
@@ -102,7 +100,7 @@
 				this.button_disabled = true;
 				let username = this.username;
 				let password = this.password;
-				let vm = this
+				let vm = this;
 
 				this.$store
 					.dispatch("login", { username, password })
@@ -115,7 +113,7 @@
 
 						vm.$notify({
 							group: "a",
-							title: vm.$t('an_error_happened'),
+							title: vm.$t("an_error_happened"),
 							text: vm.$t("wrong_password")
 						});
 					});

@@ -15,9 +15,9 @@ module.exports = async (req, res, next) => {
             password: req.body.password
         })
         scoutnet_token = auth_request.data.token
-        result.token = jwt.signToken({token: scoutnet_token})
-    } catch(error) {
-        return res.status(401).json({message: error.message})
+        result.token = jwt.signToken({ token: scoutnet_token })
+    } catch (error) {
+        return res.status(401).json({ message: error.message })
     }
 
 
@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
         result.roles = role_request.data
 
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        return res.status(500).json({ message: error.message })
     }
 
 
@@ -49,9 +49,9 @@ module.exports = async (req, res, next) => {
         result.member = profile_request.data
 
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        return res.status(500).json({ message: error.message })
     }
-    
+
     return res.status(200).json(result)
 
 }
