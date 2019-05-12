@@ -12,8 +12,7 @@
 			<div class="profilegroup">
 				<span class="profiletitle">Gruppe</span>
 				<div class="profilevalue">
-					<!-- TODO: key kan ikke være group, men må være group.key. Samme med den under. -->
-					<span :key="group" v-for="group in getMemberGroups">{{group}}</span>
+					<span :key="id" v-for="(group, id) in getMemberGroups">{{group}}</span>
 				</div>
 			</div>
 			<div class="profilegroup">
