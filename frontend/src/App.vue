@@ -19,7 +19,7 @@
 			return {
 				transitionName: "slide-left",
         ready: false,
-        appHeight: '100vh'
+        appHeight: window.innerHeight + 'px'
 			};
 		},
 		components: {
@@ -38,8 +38,8 @@
 		},
 		methods: {
 			resizeHandler() {
-				let vh = window.innerHeight * 0.01;
-        this.appHeight = vh;
+				// let vh = window.innerHeight * 0.01;
+        this.appHeight = window.innerHeight + 'px';
 			}
 		},
 		mounted() {
