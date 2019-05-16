@@ -17,8 +17,8 @@
 		<v-layout row justify-center>
 			<v-dialog v-model="installDialog" persistent max-width="290">
 				<v-card>
-					<v-card-title class="headline">Use Google's location service?</v-card-title>
-					<v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+					<v-card-title class="headline">Velkommen til speiderappen!</v-card-title>
+					<v-card-text>Som du sikkert har merket er dette et nettsted, og ikke en "app" som vi kjenner til den. Dette er en såkalt "web app" (eller nettapplikasjon på norsk), og det som er spesielt med den er at det er mulig å laste den ned. I fremtiden vil den også fungere uten nettilgang. Prøv å laste ned appen :)</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
 						<v-btn color="red darken-1" flat @click="installDialog = false">Lukk</v-btn>
