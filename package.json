@@ -37,7 +37,8 @@
     "vuetify": "^1.5.7",
     "vuetify-loader": "^1.2.1",
     "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "yes-https": "^1.0.0"
   },
   "engines": {
     "node": "10.3.0"

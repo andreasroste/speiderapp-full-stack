@@ -2,13 +2,13 @@ const port = process.env.PORT || 3000
 
 const express = require('express')
 const path = require('path')
-const requireHttps = require('require-https')
+const yes = require('yes-https')
 const app = express()
 
 const backend = require('./backend/index')
 
 // Force HTTPS
-app.use(requireHttps());
+app.use(yes());
 app.enable('trust proxy');
 
 
