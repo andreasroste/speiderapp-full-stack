@@ -112,8 +112,6 @@
 
 
 <script>
-	import log from "../log";
-
 	export default {
 		data: () => {
 			return {

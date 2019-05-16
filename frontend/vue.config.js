@@ -11,6 +11,10 @@ module.exports = {
   pwa: {
     name: 'Speiderapp',
     themeColor: '#596578',
-    msTileColor: '#596578'
+    msTileColor: '#596578',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'public/service-worker.js'
+    }
   }
 }
