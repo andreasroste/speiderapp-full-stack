@@ -10,7 +10,7 @@
 			<div class="filtermenu" v-if="filtering">
 				<h3>TYPE</h3>
 				<div class="grid-3">
-					<div class="filtermenubutton">Gruppe</div>
+					<div class="filtermenubutton filter_active">Gruppe</div>
 					<div class="filtermenubutton">Krets</div>
 					<div class="filtermenubutton">Nasjonalt</div>
 					<div class="filtermenubutton">Internasjonalt</div>
@@ -114,6 +114,9 @@
 		text-align: center;
 		display: inline-block;
 	}
+	.filter_active {
+		background: red;
+	}
 	.grid-3 {
 		display: grid;
 		grid-gap: 5px;
@@ -153,12 +156,7 @@
 					vm.events = response.data;
 					vm.loading = false;
                 }).catch(() => {
-					vm.loading = false;
-                    vm.$notify({
-                        group: "varsel",
-                        title: "En feil oppsto",
-                        text: "Jeg klarte ikke å hente info fra speiding.no :("
-                    });
+					vm.$store.dispatch('showSnackbar', {text: "Kunne ikke laste inn arrangementer.", color: 'error'});
                 });
 			},
 			gotoEvent(event) {

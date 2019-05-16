@@ -1,10 +1,18 @@
 <template>
 	<v-app>
-    <v-progress-circular indeterminate v-if="!this.ready"></v-progress-circular>
+		<v-progress-circular indeterminate v-if="!this.ready"></v-progress-circular>
 		<div id="app" :style="{ height: appHeight }" v-if="this.ready">
 			<router-view id="approuter"></router-view>
 			<Dockbar id="dockbar" v-if="this.$store.getters.isLoggedIn"></Dockbar>
 		</div>
+		<v-snackbar
+			v-model="$store.state.snackbar.visible"
+			:color="$store.state.snackbar.color"
+			:timeout="$store.state.snackbar.timeout"
+		>
+			{{ $store.state.snackbar.text }}
+			<v-btn dark flat @click="$store.dispatch('closeSnackbar')">Close</v-btn>
+		</v-snackbar>
 	</v-app>
 </template>
 
@@ -18,8 +26,8 @@
 		data() {
 			return {
 				transitionName: "slide-left",
-        ready: false,
-        appHeight: window.innerHeight + 'px'
+				ready: false,
+				appHeight: window.innerHeight + "px"
 			};
 		},
 		components: {
@@ -38,13 +46,12 @@
 		},
 		methods: {
 			resizeHandler() {
-				// let vh = window.innerHeight * 0.01;
-        this.appHeight = window.innerHeight + 'px';
+				this.appHeight = window.innerHeight + "px";
 			}
 		},
 		mounted() {
 			window.addEventListener("resize", this.resizeHandler);
-      this.ready = true;
+			this.ready = true;
 		}
 	};
 </script>
@@ -54,9 +61,10 @@
 		src: url(assets/fonts/dinot.otf);
 		font-family: "DINOT";
 	}
-	html, body {
+	html,
+	body {
 		overflow-y: hidden;
-    height: 100%;
+		height: 100%;
 	}
 	* {
 		box-sizing: border-box;
@@ -95,7 +103,7 @@
 		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
-    height: 100%;
+		height: 100%;
 	}
 
 	#approuter {

@@ -20,12 +20,6 @@
 					</v-card>
 				</div>
 			</div>
-			<div class="profilegroup">
-				<span class="profiletitle">QR-kode</span>
-				<div class="profilevalue" style="text-align: center">
-					<qriously :value="this.qr_value" :size="200"/>
-				</div>
-			</div>
 			<router-link to="/logout" class="s-btn">Logg ut</router-link>
 		</div>
 		<div class="onesignal-customlink-container"></div>

@@ -10,7 +10,12 @@ export default new Vuex.Store({
     auth_status: '',
     token: localStorage.getItem('token') || '',
     user: {},
-    roles: {}
+    roles: {},
+    snackbar: {
+      visible: false,
+      timeout: 6000,
+      text: ''
+    }
   },
   mutations: {
     auth_request(state) {
@@ -45,6 +50,15 @@ export default new Vuex.Store({
         registration_link,
         date
       }
+    },
+    showSnackbar(state, info){
+      state.snackbar.text = info.text || ""
+      state.snackbar.timeout = info.timeout || 6000
+      state.snackbar.color = info.color || 'default'
+      state.snackbar.visible = true
+    },
+    closeSnackbar(state){
+      state.snackbar.visible = false
     }
 
   },
@@ -56,7 +70,7 @@ export default new Vuex.Store({
           .then((resp) => {
             if(!resp.data.token){
               // Wrong login
-              reject()
+              reject(401)
             }
             const token = resp.data.token
             const user = resp.data.member
@@ -73,7 +87,7 @@ export default new Vuex.Store({
           .catch((err) => {
             commit('auth_error')
             localStorage.removeItem('token')
-            reject(err)
+            reject(err.response)
           })
       })
     },
@@ -90,6 +104,12 @@ export default new Vuex.Store({
         commit('setCurrentEvent', event)
         resolve()
       })
+    },
+    showSnackbar({commit}, info){
+      commit('showSnackbar', info)
+    },
+    closeSnackbar({commit}) {
+      commit('closeSnackbar')
     }
   },
   getters: {

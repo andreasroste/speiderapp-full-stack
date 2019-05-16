@@ -20,6 +20,8 @@
 				>
 				<a href="https://min.speiding.no/request_password" class="gp">{{ $t('forgot_password') }}</a>
 				<input type="submit" class="s-btn" :disabled="button_disabled" :value="$t('login')">
+			
+				<div class="spinner" v-if="button_disabled"></div>
 			</form>
 		</div>
 	</div>
@@ -69,6 +71,31 @@
 		margin-bottom: 30px;
 	}
 
+	.s-btn:disabled {
+		color: #ddd;
+	}
+
+	@keyframes spinner {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.spinner {
+		content: "";
+		display: block;
+		box-sizing: border-box;
+		margin: 0 auto;
+		width: 35px;
+		height: 35px;
+		border-radius: 50%;
+		border: 3px solid #f2cc07;
+		border-top-color: #63ac3b;
+		border-right-color: #751052;
+		border-bottom-color: #2baccc;
+		animation: spinner 0.6s linear infinite;
+	}
+
 	#username,
 	#password {
 		text-align: center;
@@ -109,13 +136,17 @@
 					})
 					.catch(err => {
 						this.button_disabled = false;
-						log.error(err);
-
-						vm.$notify({
-							group: "a",
-							title: vm.$t("an_error_happened"),
-							text: vm.$t("wrong_password")
-						});
+						if (err.status == 401) {
+							vm.$store.dispatch("showSnackbar", {
+								text: "Feil brukernavn/passord.",
+								color: "error"
+							});
+						}else{
+							vm.$store.dispatch("showSnackbar", {
+								text: "En feil oppsto.",
+								color: "error"
+							});
+						}
 					});
 			}
 		}
