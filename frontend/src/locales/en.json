@@ -12,5 +12,6 @@
   "home": "Hjem",
   "group": "Gruppe",
   "events": "Arrangementer",
-  "logout": "Logg ut"
+  "logout": "Logg ut",
+  "install_app": "Som du sikkert har merket er dette et nettsted, og ikke en \"app\" som vi kjenner til. Dette er en såkalt \"web app\" (eller nettapplikasjon på norsk), og det som er spesielt med denne nettsiden er at det er mulig å laste den ned (på noen enheter). I fremtiden vil den også fungere uten nettilgang. Prøv å laste ned appen :)"
 }
