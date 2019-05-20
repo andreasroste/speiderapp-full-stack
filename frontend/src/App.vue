@@ -105,6 +105,7 @@
 		text-transform: uppercase;
 		letter-spacing: 2px;
 		text-align: center;
+		font-weight: 100;
 	}
 
 	.s-btn {

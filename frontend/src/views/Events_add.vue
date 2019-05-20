@@ -4,7 +4,7 @@
         <v-btn @click="$router.go(-1)" absolute top left fab id="back_btn">
             <v-icon>arrow_back</v-icon>
         </v-btn>
-        <h1 class="font-weight-thin">Nytt arrangement</h1>
+        <h1>Nytt arrangement</h1>
         <br>
         <v-stepper vertical v-model="e1">
 
