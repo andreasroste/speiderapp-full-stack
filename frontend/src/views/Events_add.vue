@@ -37,7 +37,7 @@
 
             <v-stepper-step :complete="e1 > 4" step="4" :editable="e1 > 4">Tid og sted</v-stepper-step>
             <v-stepper-content step="4">
-                <v-date-picker v-model="event_date" first-day-of-week="1" landscape reactive full_width></v-date-picker><br>
+                <v-date-picker v-model="event_date" first-day-of-week="1" reactive full_width></v-date-picker><br>
                 <v-time-picker format="24hr" scrollable class="mt-3" v-model="event_time" full_width></v-time-picker><br>
                 <v-btn @click="e1 = 5">Videre</v-btn>
             </v-stepper-content>
