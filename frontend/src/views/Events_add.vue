@@ -32,7 +32,7 @@
                 <v-text-field v-model="event_name" label="Arrangementets navn" required></v-text-field>
                 <v-text-field v-model="event_place" label="Sted" required></v-text-field>
                 <v-text-field v-model="event_desc" label="Beskrivelse" required></v-text-field>
-                <v-btn @click="e1 = 4" :disabled="!event_name || !event_place || !event_desc">Videre</v-btn>
+                <v-btn @click="e1 = 4" :disabled="!event_name || !event_place">Videre</v-btn>
             </v-stepper-content>
 
             <v-stepper-step :complete="e1 > 4" step="4" :editable="e1 > 4">Tid og sted</v-stepper-step>
