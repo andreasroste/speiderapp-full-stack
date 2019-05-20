@@ -1,52 +1,71 @@
 <template>
-		<div class="page">
-			<div class="page-header">
-				<v-btn @click="filtering = !filtering" fab id="filter_btn">
-					<v-icon v-if="!filtering">menu</v-icon>
-					<v-icon v-if="filtering">close</v-icon>
-				</v-btn>
-				<h1>Arrangementer</h1>
-			</div>
-			<div class="filtermenu" v-if="filtering">
-				<h3>TYPE</h3>
-				<div class="grid-3">
-					<div class="filtermenubutton filter_active">Gruppe</div>
-					<div class="filtermenubutton">Krets</div>
-					<div class="filtermenubutton">Nasjonalt</div>
-					<div class="filtermenubutton">Internasjonalt</div>
-					<div class="filtermenubutton">Annet</div>
-				</div>
-				<h3>ALDERSGRUPPE</h3>
-				<div class="grid-3">
-					<div class="filtermenubutton">Småspeider</div>
-					<div class="filtermenubutton">Stifinner</div>
-					<div class="filtermenubutton">Vandrer</div>
-					<div class="filtermenubutton">Rover</div>
-					<div class="filtermenubutton">Leder</div>
-					<div class="filtermenubutton">Annet</div>
-				</div>
-			</div>
-			<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
-			<br>
-			<div class="events">
-				<Event
-					v-for="event in events"
-					:key="event.id"
-					:title="event.title"
-					:desc="event.desc"
-					:position="event.position"
-					:date="formatDate(event.start_date, event.end_date)"
-					:registration="event.registration"
-					:img_url="event.img_url"
-					:body="event.body"
-					:age_groups="event.age_groups"
-					@clicked="gotoEvent(event)"
-				/>
-			</div>
-			<v-btn id="new_event_btn" fab ripple color="#2baccc" to="/events/create">
-				<v-icon>add</v-icon>
+	<div class="page">
+		<div class="page-header">
+			<v-btn @click="filtering = !filtering" fab id="filter_btn">
+				<v-icon v-if="!filtering">menu</v-icon>
+				<v-icon v-if="filtering">close</v-icon>
 			</v-btn>
+			<h1>Arrangementer</h1>
 		</div>
+		<div class="filtermenu" v-if="filtering">
+			<h3>TYPE</h3>
+			<div class="grid-3">
+				<div :class="{ filtermenubutton: true, filter_active: filters.group }" @click="filters.group = !filters.group">
+					Gruppe
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.district }" @click="filters.district = !filters.district">
+					Krets
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.organisation }" @click="filters.organisation = !filters.organisation">
+					Forbund
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.international }" @click="filters.international = !filters.international">
+					Internasjonalt
+				</div>
+			</div>
+			<h3>ALDERSGRUPPE</h3>
+			<div class="grid-3">
+				<div :class="{ filtermenubutton: true, filter_active: filters.smaspeider }" @click="filters.smaspeider = !filters.smaspeider">
+					Småspeider
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.stifinner }" @click="filters.stifinner = !filters.stifinner">
+					Stifinner
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.vandrer }" @click="filters.vandrer = !filters.vandrer">
+					Vandrer
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.rover }" @click="filters.rover = !filters.rover">
+					Rover
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.leder }" @click="filters.leder = !filters.leder">
+					Leder
+				</div>
+				<div :class="{ filtermenubutton: true, filter_active: filters.other_audience }" @click="filters.other_audience = !filters.other_audience">
+					Annet
+				</div>
+			</div>
+		</div>
+		<v-progress-circular indeterminate v-if="loading"></v-progress-circular>
+		<br />
+		<div class="events">
+			<Event
+				v-for="event in filtered_events"
+				:key="event.id"
+				:title="event.title"
+				:desc="event.desc"
+				:position="event.position"
+				:date="formatDate(event.start_date, event.end_date)"
+				:registration="event.registration"
+				:img_url="event.img_url"
+				:body="event.body"
+				:age_groups="event.age_groups"
+				@clicked="gotoEvent(event)"
+			/>
+		</div>
+		<!--<v-btn id="new_event_btn" fab ripple color="#2baccc" to="/events/create">
+				<v-icon>add</v-icon>
+		</v-btn>-->
+	</div>
 </template>
 
 <style scoped>
@@ -66,7 +85,7 @@
 		position: relative;
 	}
 
-	.page-header{
+	.page-header {
 		padding: 5px;
 		z-index: 100;
 		width: 100%;
@@ -127,8 +146,8 @@
 
 	@media screen and (max-width: 400px) {
 		/* h1 {
-			font-size: 75%;
-		} */
+										font-size: 75%;
+									} */
 	}
 </style>
 
@@ -144,6 +163,18 @@
 		data: () => {
 			return {
 				events: {},
+				filters: {
+					group: false,
+					district: false,
+					organisation: false,
+					international: false,
+					smaspeider: false,
+					stifinner: false,
+					vandrer: false,
+					rover: false,
+					leder: false,
+					other_audience: false
+				},
 				loading: true,
 				filtering: false
 			};
@@ -151,26 +182,26 @@
 		methods: {
 			getEvents() {
 				const vm = this;
-				axios.get("/api/events").then(response => {
-                    sessionStorage.setItem('speiding_no_events', JSON.stringify(response.data))
-					vm.events = response.data;
-					vm.loading = false;
-                }).catch(() => {
-					vm.$store.dispatch('showSnackbar', {text: "Kunne ikke laste inn arrangementer.", color: 'error'});
-                });
+				axios
+					.get("/api/events")
+					.then(response => {
+						sessionStorage.setItem(
+							"speiding_no_events",
+							JSON.stringify(response.data)
+						);
+						vm.events = response.data;
+						vm.filtered_events = response.data;
+						vm.loading = false;
+					})
+					.catch(() => {
+						vm.$store.dispatch("showSnackbar", {
+							text: "Kunne ikke laste inn arrangementer.",
+							color: "error"
+						});
+					});
 			},
 			gotoEvent(event) {
-				// this.$store.dispatch('gotoEvent', {
-				// 	name: event.title,
-				// 	location: event.position,
-				// 	fee: event.fee,
-				// 	image_url: event.img_url,
-				// 	desc: event,
-				// 	body: event.body,
-				// 	registration_link: event.registration,
-				// 	date: this.formatDate(event.start_date, event.end_date)
-				// });
-				this.$router.push('/events/' + event.id);
+				this.$router.push("/events/" + event.id);
 			},
 			formatDate(start, end) {
 				const start_date = new Date(start);
@@ -300,6 +331,32 @@
 				this.events = JSON.parse(events);
 			} else {
 				this.getEvents();
+			}
+		},
+		computed: {
+			filtered_events() {
+				return this.events.filter(e => {
+					if (!this.filters.smaspeider &&
+						!this.filters.vandrer &&
+						!this.filters.rover &&
+						!this.filters.leder){
+						return true;
+					}
+
+					if (this.filters.smaspeider && e.age_groups.includes("7394")){
+						return true;
+					}
+					if (this.filters.vandrer && e.age_groups.includes("7278")){
+						return true;
+					}
+					if (this.filters.rover && e.age_groups.includes("7395")){
+						return true;
+					}
+					if (this.filters.leder && e.age_groups.includes("7277")){
+						return true;
+					}
+					return false;
+				});
 			}
 		}
 	};

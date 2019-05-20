@@ -18,7 +18,7 @@
 			<v-dialog v-model="installDialog" persistent max-width="290">
 				<v-card>
 					<v-card-title class="headline">Velkommen til speiderappen!</v-card-title>
-					<v-card-text>Som du sikkert har merket er dette et nettsted, og ikke en "app" som vi kjenner til den. Dette er en såkalt "web app" (eller nettapplikasjon på norsk), og det som er spesielt med den er at det er mulig å laste den ned. I fremtiden vil den også fungere uten nettilgang. Prøv å laste ned appen :)</v-card-text>
+					<v-card-text>Som du sikkert har merket er dette et nettsted, og ikke en "app" som vi kjenner til. Dette er en såkalt "web app" (eller nettapplikasjon på norsk), og det som er spesielt med denne nettsiden er at det er mulig å laste den ned (på noen enheter). I fremtiden vil den også fungere uten nettilgang. Prøv å laste ned appen :)</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
 						<v-btn color="red darken-1" flat @click="installDialog = false">Lukk</v-btn>
