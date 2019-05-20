@@ -62,9 +62,10 @@
 				@clicked="gotoEvent(event)"
 			/>
 		</div>
-		<!--<v-btn id="new_event_btn" fab ripple color="#2baccc" to="/events/create">
+		<!-- TODO: Gjør denne tilgjengelig for flere enn bare meg. -->
+		<v-btn id="new_event_btn" fab ripple color="#2baccc" to="/events/create" v-if="$store.getters.user.member_no == 200660">
 				<v-icon>add</v-icon>
-		</v-btn>-->
+		</v-btn>
 	</div>
 </template>
 
