@@ -14,8 +14,8 @@ module.exports = async (req, res, next) => {
             username: req.body.username,
             password: req.body.password
         })
+        req.session.user.scoutnet_token = auth_request.data.token
         scoutnet_token = auth_request.data.token
-        result.token = jwt.signToken({ token: scoutnet_token })
     } catch (error) {
         return res.status(401).json({ message: error.message })
     }
@@ -51,6 +51,8 @@ module.exports = async (req, res, next) => {
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
+
+    result.session = req.session;
 
     return res.status(200).json(result)
 

@@ -19,9 +19,8 @@ Vue.use(vueScrollPosition, {
   router
 })
 
-const token = localStorage.getItem('token') // Getting token from localStorage
+Axios.defaults.withCredentials = true
 Vue.prototype.$http = Axios // Makes axios accessible globally
-if (token) Vue.prototype.$http.defaults.headers.common['Authorization'] = token // If token is set, use the token in the Authorization header for all requests to server.
 
 
 router.beforeEach((to, from, next) => {

@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     auth_status: '',
-    token: localStorage.getItem('token') || '',
     user: {},
     roles: {},
     snackbar: {
@@ -21,9 +20,8 @@ export default new Vuex.Store({
     auth_request(state) {
       state.auth_status = 'loading'
     },
-    auth_success(state, {token, user, roles}) {
+    auth_success(state, {user, roles}) {
       state.auth_status = 'authenticated'
-      state.token = token
       state.user = user
       state.roles = roles
     },
@@ -68,25 +66,20 @@ export default new Vuex.Store({
         commit('auth_request')
         axios({ url: '/api/login', data: user, method: 'POST'})
           .then((resp) => {
-            if(!resp.data.token){
+            if(!resp.data.member.member_no){
               // Wrong login
               reject(401)
             }
-            const token = resp.data.token
             const user = resp.data.member
             const roles = resp.data.roles
 
-            localStorage.setItem('token', 'Bearer ' + token)
-
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-
-            commit('auth_success', {token, user, roles})
+            commit('auth_success', {user, roles})
 
             resolve(resp.data)
           })
           .catch((err) => {
             commit('auth_error')
-            localStorage.removeItem('token')
+            axios({url: "/logout", method: 'POST', data: true})
             reject(err.response)
           })
       })
@@ -94,8 +87,7 @@ export default new Vuex.Store({
     logout({commit}) {
       return new Promise((resolve) => {
         commit('logout')
-        localStorage.removeItem('token')
-        delete axios.defaults.headers.common['Authorization']
+        axios({url: "/logout", method: 'POST', data: true})
         resolve()
       })
     },

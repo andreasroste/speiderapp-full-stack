@@ -2,7 +2,7 @@
 	<div>
 		<h1>Din profil</h1>
 		<div class="profile">
-			<img src="https://picsum.photos/395" alt class="profileimg border-default">
+			<img src="/api/profileimage" alt class="profileimg border-default">
 			<div class="profilegroup">
 				<span class="profiletitle">Navn</span>
 				<div class="profilevalue">{{user.first_name + ' ' + user.last_name}}</div>
@@ -64,6 +64,11 @@
 	import { mapGetters } from "vuex";
 
 	export default {
+		data() {
+			return {
+				profileimageurl: ''
+			}
+		},
 		computed: {
 			...mapGetters(["user", "user_memberships", "roles"])
 		}

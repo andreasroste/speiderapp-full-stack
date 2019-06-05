@@ -1,0 +1,126 @@
+
+@affId = 1450
+@host = integrate-staging.deltager.no/api/v1
+@apiToken = CfDJ8OkFyemVnqdGhT9QqAabmAV_sRARyUS48ckTVagKPyiAi0PkpFtNM0YEVk68MeP1KFCbtseTNo5f8lvgGVVAu-nrx4F4grddaPCp2dji9DCZ_nSJtirqltgycxDa8XWo5E_A6AYGCpu3T6tC-g_5BMd3xav7THeuiw3CpQSt5Bak2YSxZ7IZ0oqDg1ZKZQ2UYx9n8L107x7vn9utSva41nGC4to9njhUiR_6pKjwt1_hxSWx5XlVRx3kb5kaWF4ZApsXh4-XfFSwty4nfr6V-wgrqbCzNW96oLPZVrjug4_obeZBDyCoNvlK-g7g8820z2QZzFvDBa_xIzeKOu-qpzQWV7xGJ_nIvHH947q-7WMWTqdovPZaHz9XuOYjHc5C1pjCkUZX6ggj8cTPuSNkil2jdXXv1L_J-Q9M1f75SVMlaFXVl1cXXo2Gtpj9jA3IXcCTzUeDtMpc3Wq-9Kvd6KDthT3DEmCKieCtOXPsR4-3emwPn6W8Ytkh5MeFEjw09IKeBLYJVacWqVqmt7DH3SJ2JGqixn4vn-TBm0lIYZoR6sYn-TzrASdKF5m8Hms8Jh674BfcajJilqUUKQ9FltY
+@contentType = application/json
+
+
+
+### Get token
+POST https://stagingapi.deltager.no/token HTTP/1.1
+Content-Type: {{contentType}}
+
+grant_type=password&username=andreas.roste@rugge.org&password=speider123&affid=1450
+
+
+### Get all organizders connected to your user
+GET https://{{host}}/organizers
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+
+### Get a specific organizer by Id
+GET https://{{host}}/organizers/16515
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+
+### Create a new organizer
+POST https://{{host}}/organizers
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+{
+  "name": "Speider gruppe 1",
+  "isOrganization": true,
+  "OrganisationNumber": 893247283974,
+  "contactPerson": {
+    "name": "Andreas Røste",
+    "telephone": "12345678",
+    "mobile": "12345678",
+    "email": "andreas.roste@rugge.org"
+  },
+  "address": {
+    "address1": "Min adresse",
+    "address2": "",
+    "postCode": "1387",
+    "city": "Asker"
+  },
+  "bankAccount": {
+      "accountNumber": "123456789",
+      "alias": "Min konto",
+      "cardOwner": {
+        "name": "Andreas Røste",
+        "telephone": "12345678",
+        "mobile": "12345678",
+        "email": "andreas.roste@rugge.org"
+      },
+      "address": {
+        "address1": "Min adresse",
+        "address2": "",
+        "postCode": "1387",
+        "city": "Asker"
+        }
+    }
+}
+
+
+
+### Update organizer
+PUT https://{{host}}/organizers
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+{
+  "Id": 16515,
+  "name": "Speider gruppa",
+  "isOrganization": true,
+  "OrganisationNumber": 893247283974,
+  "contactPerson": {
+   "name": "Andreas Røste",
+   "telephone": "12345678",
+   "mobile": "12345678",
+   "email": "andreas.roste@rugge.org"
+  },
+  "address": {
+   "address1": "Min adresse",
+    "address2": "",
+    "postCode": "1387",
+    "city": "Asker"
+  }
+}
+
+
+### Get all acoounts for a specific organizer
+GET https://{{host}}/organizers/16515/accounts
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+
+
+### Update a specific account
+PUT https://{{host}}/organizers/16515/accounts
+Content-Type: {{contentType}}
+Authorization: bearer {{apiToken}}
+
+ {
+      "id": 64,
+      "organizerId": 16515,
+      "accountNumber": "123456789",
+      "alias": "Min konto",
+      "isDefault": true,     
+      "cardOwner": {
+        "name": "Andreas Røste",
+        "telephone": "12345678",
+        "mobile": "12345678",
+        "email": "andreas.roste@rugge.org"
+      },
+      "address": {
+        "address1": "Min adresse",
+        "address2": null,
+        "postCode": "1387",
+        "city": "Asker"
+      }
+}
+
+
