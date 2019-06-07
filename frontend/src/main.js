@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import './plugins/vuetify'
-import Notifications from 'vue-notification';
 import Axios from 'axios'
 import vueScrollPosition from 'vue-scroll-behavior';
 
@@ -11,9 +10,6 @@ import './registerServiceWorker'
 import store from './store'
 
 Vue.config.productionTip = false
-
-Vue.use(Notifications); // Enable notifications
-Vue.prototype.$http = Axios
 
 Vue.use(vueScrollPosition, {
   router

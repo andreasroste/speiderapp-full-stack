@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
+axios.defaults.withCredentials = true
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -70,16 +72,16 @@ export default new Vuex.Store({
               // Wrong login
               reject(401)
             }
+            // Correct credentials
             const user = resp.data.member
             const roles = resp.data.roles
 
             commit('auth_success', {user, roles})
 
-            resolve(resp.data)
+            resolve()
           })
           .catch((err) => {
             commit('auth_error')
-            axios({url: "/logout", method: 'POST', data: true})
             reject(err.response)
           })
       })
@@ -87,7 +89,7 @@ export default new Vuex.Store({
     logout({commit}) {
       return new Promise((resolve) => {
         commit('logout')
-        axios({url: "/logout", method: 'POST', data: true})
+        axios({url: "/api/logout", method: 'POST', data: true})
         resolve()
       })
     },
@@ -105,7 +107,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    isLoggedIn: state => !!state.token,
+    isLoggedIn: state => state.auth_status == 'authenticated' ? true : false,
     authStatus: state => state.auth_status,
     roles: state => {
       let result = []

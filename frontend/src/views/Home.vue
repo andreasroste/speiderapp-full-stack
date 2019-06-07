@@ -64,11 +64,6 @@
 	import { mapGetters } from "vuex";
 
 	export default {
-		data() {
-			return {
-				profileimageurl: ''
-			}
-		},
 		computed: {
 			...mapGetters(["user", "user_memberships", "roles"])
 		}

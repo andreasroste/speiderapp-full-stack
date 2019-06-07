@@ -126,13 +126,16 @@
 				let username = this.username;
 				let password = this.password;
 				let vm = this;
+				console.log("Logging in...")
 
 				this.$store
 					.dispatch("login", { username, password })
 					.then(() => {
-						this.$router.push("/");
+						vm.$router.push("/");
+						console.log("Success. Redirected.")
 					})
 					.catch(err => {
+						console.log("Error logging in", err)
 						this.button_disabled = false;
 						if (err.status == 401) {
 							vm.$store.dispatch("showSnackbar", {
