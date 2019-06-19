@@ -34,8 +34,24 @@ module.exports = async (req, res, next) => {
             }
         })
 
-        result.roles = role_request.data
-        req.session.user.roles = role_request.data
+        let roleresult = []
+        for (const level in role_request.data) {
+            if (role_request.data.hasOwnProperty(level)) {
+                const roles_on_level = role_request.data[level];
+                if (Object.keys(roles_on_level).length) {
+                    for (const body_id in roles_on_level) {
+                        let hurra = Object.assign({}, roles_on_level[body_id])
+                        for (const roleid in hurra) {
+                            roleresult.push({ body_id, level, roleid, role_key: hurra[roleid] })
+                        }
+                    }
+                }
+
+            }
+        }
+
+        result.roles = roleresult
+        req.session.user.roles = roleresult
 
     } catch (error) {
         return res.status(500).json({ message: error.message })

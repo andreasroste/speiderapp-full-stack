@@ -21,6 +21,7 @@ const loginController = require('./controllers/login');
 const speidingnoeventsController = require('./controllers/speidingnoevents');
 const speidingnosingleeventController = require('./controllers/speidingnosingleevent');
 const profileController = require('./controllers/profileController');
+const userProfilesController = require('./controllers/getUserProfiles');
 
 
 // Routes
@@ -28,8 +29,11 @@ app.post('/login', loginController);
 app.get('/events', speidingnoeventsController);
 app.get('/event/:id', speidingnosingleeventController);
 app.get('/profileimage', profileController.image);
+app.get('/memberships', profileController.memberships);
+app.get('/getmembers/group/:groupid', userProfilesController.group);
 app.post('/logout', (req,res) =>{
   req.session.destroy();
+  res.status(200);
 })
 
 
