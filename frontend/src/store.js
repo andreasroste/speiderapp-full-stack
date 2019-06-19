@@ -150,7 +150,7 @@ export default new Vuex.Store({
             for(const body_id in roles_on_level){
               let hurra = Object.assign({}, roles_on_level[body_id])
               for( const roleid in hurra) {
-                result.push({body_id, roleid})
+                result.push({body_id, level, roleid, role_key: hurra[roleid]})
               }
             }
           }

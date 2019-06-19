@@ -126,13 +126,13 @@
 				let username = this.username;
 				let password = this.password;
 				let vm = this;
-				console.log("Logging in...")
+				console.log("%c Logging in...", "background-color: #ff0; color: black;")
 
 				this.$store
 					.dispatch("login", { username, password })
 					.then(() => {
 						vm.$router.push("/");
-						console.log("Success. Redirected.")
+						console.log("%c Success. Redirected.", "background-color: #0f0; color: black;")
 					})
 					.catch(err => {
 						console.log("Error logging in", err)
