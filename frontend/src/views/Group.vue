@@ -13,7 +13,7 @@
                             <template v-slot:header>
                                 <div>
                                     <span class="grey--text">[{{member.member_no}}]</span> {{member.name | aeoeaa}}
-                                    <span style="color: #63ac3b;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">sjekk politiattest</span>
+                                    <span style="color: #97282e;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">(sjekk politiattest) </span>
                                 </div>
                             </template>
                             <v-card>
