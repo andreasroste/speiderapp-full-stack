@@ -9,6 +9,7 @@ import store from '../store'
 export default {
     mounted() {
         const vm = this
+        sessionStorage.clear();
         store.dispatch('logout').then(() => {
             setTimeout(() => {
                 vm.$router.push('/')

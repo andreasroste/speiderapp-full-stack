@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>Gruppe</h1>
-        <v-progress-circular indeterminate v-if="!got_memberships"></v-progress-circular>
-        <v-card v-for="group in groups" :key="group.id">
+        <v-progress-circular indeterminate v-if="loading_site"></v-progress-circular>
+        <v-card v-for="group in groupmemberships" class="group-card" :key="group.id">
             <v-card-text>
                 <h1>{{group.name}}</h1>
                 <v-icon>home</v-icon> {{group.address.address_line1 || ''}}
-                <div v-if="seeMembers">
+                <div v-if="groupmembers.hasOwnProperty(group.id)">
                     <h2>Medlemmer</h2>
                     <v-expansion-panel>
                         <v-expansion-panel-content v-for="member in groupmembers[group.id].members" :key="member.member_no">
@@ -24,22 +24,23 @@
                                             <tr>
                                                 <td class="font-weight-bold">Politiattest</td>
                                                 <td>
-                                                    <span v-if="!member.police_check.required" style="padding: 5px; border-radius: 3px; color: #63ac3b;">Trengs ikke. Alt i orden :)</span>
+                                                    <span v-if="!member.police_check.required" style="color: #63ac3b;">Trengs ikke. Alt i orden :)</span>
                                                     <span v-if="member.police_check.required">
-                                                        <span v-if="member.police_check.summary == 'Gyldig'"><span style="padding: 5px; border-radius: 3px; color: #63ac3b;">Alt i orden! :)</span></span>
-                                                        <span v-if="member.police_check.summary != 'Gyldig'"><span style="padding: 5px; border-radius: 3px; color: #97282e;">Oops! Her må det ordnes opp så fort som mulig.</span></span>
+                                                        <span v-if="member.police_check.summary == 'Gyldig'"><span style="color: #63ac3b;">Alt i orden! :)</span></span>
+                                                        <span v-if="member.police_check.summary != 'Gyldig'"><span style="color: #97282e;">Mangler</span></span>
                                                     </span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="font-weight-bold">E-postadresse</td>
                                                 <td>{{member.primary_email}}</td>
+                                                <td><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'mailto:' + member.primary_email"><v-icon dark>email</v-icon></v-btn></td>
                                             </tr>
                                             <tr v-for="(info, id) in member.contact_info" :key="id">
                                                 <td class="font-weight-bold">{{typeidtotype(info.type_id, group.id) | aeoeaa}}</td>
                                                 <td>{{info.value | aeoeaa}}</td>
-                                                <td v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35"><v-btn style="background: #63ac3b; color: #fff;" :href="'tel:' + info.value" ><v-icon left dark>call</v-icon> Ring</v-btn></td>
-                                                <td v-if="info.type_id == 13 || info.type_id == 15"><v-btn style="background: #63ac3b; color: #fff;" :href="'mailto:' + info.value"><v-icon left dark>email</v-icon> send e-post</v-btn></td>
+                                                <td v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35"><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'tel:' + info.value" ><v-icon dark>call</v-icon></v-btn></td>
+                                                <td v-if="info.type_id == 13 || info.type_id == 15"><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'mailto:' + info.value"><v-icon dark>email</v-icon></v-btn></td>
                                                 <td v-else></td>
                                             </tr>
                                         </tbody>
@@ -54,57 +55,46 @@
     </div>
 </template>
 
-<script>
+<style scoped>
+    .group-card{
+        margin-bottom: 20px;
+    }
+</style>
 
-import { mapGetters } from 'vuex'
+
+<script>
 
 export default {
     data() {
         return {
             groupmemberships: {},
-            got_memberships: false,
-            seeMembers: false,
-            groupmembers: {}
+            groupmembers: {},
+            loading_site: true,
+            loading_groups: true
         }
     },
     mounted() {
         let sessionstoredGroupmemberships = sessionStorage.getItem('group_memberships');
         if(sessionstoredGroupmemberships){
             this.groupmemberships = JSON.parse(sessionstoredGroupmemberships);
-            this.got_memberships = true;
+            this.loading_site = false;
             this.getAllMembers();
         }else{
             this.$http.get('/api/memberships').then(response => {
                 if(response.data.hasOwnProperty('group')){
                     this.groupmemberships = response.data.group
+                    this.loading_site = false;
                     sessionStorage.setItem('group_memberships', JSON.stringify(response.data.group))
                 }else{
                     this.groupmemberships = false
+                    this.loading_site = false;
                     sessionStorage.setItem('group_memberships', false)
                 }
                 this.getAllMembers();
-                this.got_memberships = true;
-            }).catch((error) => {
-                console.log(error)
+            }).catch(() => {
                 this.groupmemberships = false;
                 // TODO: Gi feilmelding
             });
-        }
-
-        
-        
-        /*this.$http.get('/api/can/seemembers').then(response => {
-            if(response.data == "true") this.seeMembers = true;
-            else this.seeMembers = false;
-        }).catch(() => {
-            this.seeMembers = false;
-        })*/
-
-        this.seeMembers = true;
-    },
-    computed: {
-        groups() {
-            return this.got_memberships ? this.groupmemberships : false;
         }
     },
     methods: {
@@ -114,25 +104,16 @@ export default {
                 this.groupmembers[group_id] = JSON.parse(sessionstored_members_in_group)
             }else{
                 this.$http.get('/api/getmembers/group/' + group_id).then(response => {
+                    sessionStorage.setItem('members_in_group_' + group_id, JSON.stringify(response.data))
                     this.groupmembers[group_id] = response.data
-                    sessionStorage.setItem('members_in_group_' + group_id, JSON.stringify(response.data));
-                }).catch((error) => {
-                    console.log(error)
-                    // TODO: Gi en ordentlig feilmelding. Noe blinkende rødt eller noe.
-                })
+                    this.$forceUpdate();
+                })// TODO: catch
             }
         },
         getAllMembers() {
             for (const groupid in this.groupmemberships) {
                 if (this.groupmemberships.hasOwnProperty(groupid)) {
-                    let sessionstoredMembers = sessionStorage.getItem('members_in_group_' + groupid);
-
-                    if(sessionstoredMembers){
-                        this.groupmembers[groupid] = JSON.parse(sessionstoredMembers);
-                    }else{
-                        this.groupmembers[groupid] = this.getMembersInGroup(groupid);
-                        sessionStorage.setItem('members_in_group_' + groupid, JSON.stringify(this.groupmembers[groupid]))
-                    }
+                    this.getMembersInGroup(groupid);
                 }
             }
         },
@@ -143,13 +124,9 @@ export default {
     },
     filters: {
         aeoeaa(text) {
-            return text
-                .replace(new RegExp('&oslash;', 'g'), 'ø')
-                .replace(new RegExp('&Oslash;', 'g'), 'Ø')
-                .replace(new RegExp('&aring;', 'g'), 'å')
-                .replace(new RegExp('&Aring;', 'g'), 'Å')
-                .replace(new RegExp('&aelig;', 'g'), 'æ')
-                .replace(new RegExp('&Aelig;', 'g'), 'Æ')
+            let textarea = document.createElement('textarea');
+            textarea.innerHTML = text;
+            return textarea.innerText;
         }
     }
 }
