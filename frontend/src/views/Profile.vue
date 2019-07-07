@@ -24,6 +24,7 @@
 					</v-card>
 				</div>
 			</div>
+			<span>Du kan endre profilinnstillingene på <a target="_blank" :href="'https://min.speiding.no/organisation/user/edit_profile/' + user.member_no">min speiding.</a></span>
 			<router-link to="/logout" class="s-btn">Logg ut</router-link>
 		</div>
 	</div>
