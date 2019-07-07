@@ -1,9 +1,9 @@
 <template>
     <div class="dockbar bg-leder">
-        <router-link class="dockicon" to="/group"><img src="../assets/icons/gruppe.png" alt=""></router-link>
+        <router-link class="dockicon" to="/"><img src="../assets/icons/gruppe.png" alt=""></router-link>
         <router-link class="dockicon" to="/events"><img src="../assets/icons/arrangementer.png" alt=""></router-link>
-        <router-link class="dockicon" to="/404"><img src="../assets/icons/kalender.png" alt=""></router-link>
-        <router-link class="dockicon" to="/"><img src="../assets/icons/profil.png" alt=""></router-link>
+        <router-link class="dockicon" to="/calendar"><img src="../assets/icons/kalender.png" alt=""></router-link>
+        <router-link class="dockicon" to="/profile"><img src="../assets/icons/profil.png" alt=""></router-link>
     </div>
 </template>
 

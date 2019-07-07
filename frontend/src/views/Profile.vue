@@ -12,17 +12,20 @@
 				<div class="profilevalue">{{user.email}}</div>
 			</div>
 			<div class="profilegroup">
+				<span class="profiletitle">Medlemsskap</span>
+				<div class="profilevalue">{{user_memberships}}</div>
+			</div>
+			<div class="profilegroup">
 				<span class="profiletitle">Roller</span>
 				<div class="profilevalue">
-					<v-card dark v-for="(levels, id) in roles" :key="id">
-						<v-card-title>{{levels.level}}</v-card-title>
-						<v-card-text>{{levels.roles}}</v-card-text>
+					<v-card dark v-for="(role, id) in roles" :key="id">
+						<v-card-title>Rolle på {{role.level | level_to_human}} ({{role.body_id}})</v-card-title>
+						<v-card-text>{{role}}</v-card-text>
 					</v-card>
 				</div>
 			</div>
 			<router-link to="/logout" class="s-btn">Logg ut</router-link>
 		</div>
-		<div class="onesignal-customlink-container"></div>
 	</div>
 </template>
 
@@ -66,6 +69,27 @@
 	export default {
 		computed: {
 			...mapGetters(["user", "user_memberships", "roles"])
+		},
+		filters: {
+			level_to_human(level) {
+				switch (level) {
+					case 'organisation':
+						return 'forbundsnivå'
+					case 'project':
+						return 'prosjektnivå'
+					case 'district':
+						return 'kretsnivå'
+					case 'group':
+						return 'gruppenivå'
+					case 'patrol':
+						return 'patruljenivå'
+					case 'troop':
+						return 'enhetsnivå'
+				
+					default:
+						return 'udefinert nivå'
+				}
+			}
 		}
 	};
 </script>

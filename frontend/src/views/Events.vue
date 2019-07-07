@@ -1,5 +1,5 @@
 <template>
-	<div class="page">
+	<div>
 		<div class="page-header">
 			<v-btn @click="filtering = !filtering" fab id="filter_btn">
 				<v-icon v-if="!filtering">menu</v-icon>
@@ -80,10 +80,6 @@
 
 	h3 {
 		margin-bottom: 10px;
-	}
-
-	.page {
-		position: relative;
 	}
 
 	.page-header {

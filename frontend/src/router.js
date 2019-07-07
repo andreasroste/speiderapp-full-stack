@@ -1,15 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Events from './views/Events.vue'
+import Profile from './views/Profile.vue'
+import Login from './views/Login.vue'
+import Group from './views/Group.vue'
+import CreateEvent from './views/Events_add.vue'
+import SingleEvent from './views/Event_info.vue'
+import Calendar from './views/Calendar.vue'
+
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/profile',
       name: 'home',
-      component: () => import('./views/Home.vue'),
+      component: Profile,
       meta: {
         name: 'home'
       }
@@ -17,16 +25,16 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue'),
+      component: Login,
       meta: {
         name: 'login',
         navbar: false
       }
     },
     {
-      path: '/group',
+      path: '/',
       name: 'group',
-      component: () => import('./views/Group.vue'),
+      component: Group,
       meta: {
         name: 'group'
       }
@@ -34,16 +42,15 @@ export default new Router({
     {
       path: '/events',
       name: 'events',
-      component: () => import('./views/Events.vue'),
+      component: Events,
       meta: {
-        name: 'events',
-        roleids: ['20']
+        name: 'events'
       }
     },
     {
       path: '/events/create',
       name: 'create_event',
-      component: () => import('./views/Events_add.vue'),
+      component: CreateEvent,
       meta: {
         name: 'create_event',
         navbar: false
@@ -52,9 +59,18 @@ export default new Router({
     {
       path: '/events/:id',
       name: 'view_event',
-      component: () => import('./views/Event_info.vue'),
+      component: SingleEvent,
       meta: {
         name: 'view_event',
+        navbar: false
+      }
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: Calendar,
+      meta: {
+        name: 'calendar',
         navbar: false
       }
     },
