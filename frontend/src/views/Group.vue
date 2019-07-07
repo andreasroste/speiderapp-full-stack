@@ -5,7 +5,68 @@
         <v-card v-for="group in groupmemberships" class="group-card" :key="group.id">
             <v-card-text>
                 <h1>{{group.name}}</h1>
-                <v-icon>home</v-icon> {{group.address.address_line1 || ''}}
+                <span>Du ble medlem i {{group.name}} for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
+                <v-expansion-panel>
+                    <v-expansion-panel-content>
+                        <template v-slot:header>
+                            <div>
+                                Ledere
+                            </div>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <strong>Gruppeleder</strong>: {{getGroupLeader(group.role_members).name | aeoeaa}}<br>
+                                <strong>Gruppestyret</strong>:
+                                <ul>
+                                    <li v-for="member in getBoardMembers(group.role_members)" :key="member.member_no">{{member.name | aeoeaa}}</li>
+                                </ul>
+                                <br>
+                                <strong>Alle ledere</strong>
+                                <ul v-for="(leader, id) in group.role_members" :key="id">
+                                    <li>{{leader.name | aeoeaa}}</li>
+                                </ul>
+                            </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                    <v-expansion-panel-content>
+                        <template v-slot:header>
+                            <div>
+                                Informasjon
+                            </div>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-icon>home</v-icon> {{group.address.address_line1 || ''}}
+                            </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                    <v-expansion-panel-content>
+                        <template v-slot:header>
+                            <div>
+                                Deg og ditt
+                            </div>
+                        </template>
+                        <v-card>
+                            <v-card-text>
+                                <v-icon>business</v-icon><strong>Enhet</strong>: {{group.troop.name || 'du tilhører ingen enhet'}}<br>
+                                <v-icon>face</v-icon><strong>Ledere i enheten</strong>
+                                <ul>
+                                    <i>
+                                        <li v-for="(leader, id) in group.troop.role_members" :key="id">{{leader.name}}</li>
+                                    </i>
+                                </ul>
+                                <v-icon>people</v-icon><strong>Patrulje</strong>: {{group.patrol.name || 'du tilhører ingen patrulje'}}<br>
+                                <v-icon>face</v-icon><strong>Ledere i patruljen</strong>
+                                <ul>
+                                    <i>
+                                        <li v-for="(leader, id) in group.patrol.role_members" :key="id">{{leader.name}}</li>
+                                    </i>
+                                </ul>
+                            </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+
                 <div v-if="groupmembers.hasOwnProperty(group.id)">
                     <h2>Medlemmer</h2>
                     <v-expansion-panel>
@@ -64,6 +125,8 @@
 
 <script>
 
+const moment = require('moment')
+
 export default {
     data() {
         return {
@@ -74,6 +137,9 @@ export default {
         }
     },
     mounted() {
+
+        moment.locale('nb');
+
         let sessionstoredGroupmemberships = sessionStorage.getItem('group_memberships');
         if(sessionstoredGroupmemberships){
             this.groupmemberships = JSON.parse(sessionstoredGroupmemberships);
@@ -119,6 +185,21 @@ export default {
         },
         typeidtotype(typeid, groupid) {
             return this.groupmembers[groupid].contact_types[typeid].label
+        },
+        getGroupLeader(role_members) {
+            return Object.values(role_members).find((member) => {
+                if(member.roles.hasOwnProperty(1)) return true;
+                else return false;
+            })
+        },
+        getBoardMembers(role_members) {
+            return Object.values(role_members).filter((member) => {
+                if(member.roles.hasOwnProperty(2)) return true;
+                else return false;
+            })
+        },
+        getMembershipDuration(date_joined) {
+            return moment(date_joined).fromNow();
         }
 
     },
