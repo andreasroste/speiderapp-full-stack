@@ -7,23 +7,24 @@
 				<input
 					type="text"
 					v-model="username"
-					id="username"
+					class="input"
 					autocomplete="username"
 					:placeholder="$t('member_no_or_email')"
-				>
+				/>
 				<input
 					type="password"
 					v-model="password"
-					id="password"
+					class="input"
 					autocomplete="password"
 					:placeholder="$t('password')"
-				>
+				/>
 				<a href="https://min.speiding.no/request_password" class="gp">{{ $t('forgot_password') }}</a>
 				<input type="submit" class="s-btn" :disabled="button_disabled" :value="$t('login')">
 			
 				<div class="spinner" v-if="button_disabled"></div>
 			</form>
 		</div>
+		<a href="https://blispeider.no" class="blispeider">Interessert i speiding?</a>
 	</div>
 </template>
 
@@ -49,11 +50,10 @@
 	}
 
 	.blispeider {
-		max-width: 500px;
-		width: 75vw;
-		margin: 10px auto;
-		margin-top: 10vh;
-		word-wrap: break-word;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	a.gp {
@@ -96,8 +96,7 @@
 		animation: spinner 0.6s linear infinite;
 	}
 
-	#username,
-	#password {
+	.input {
 		text-align: center;
 		border: 1px solid black;
 		border-radius: 30px;
@@ -107,6 +106,7 @@
 		max-width: 500px;
 		margin: 10px auto;
 		display: block;
+		outline: none;
 	}
 </style>
 
@@ -126,16 +126,13 @@
 				let username = this.username;
 				let password = this.password;
 				let vm = this;
-				console.log("%c Logging in...", "background-color: #ff0; color: black;")
 
 				this.$store
 					.dispatch("login", { username, password })
 					.then(() => {
 						vm.$router.push("/");
-						console.log("%c Success. Redirected.", "background-color: #0f0; color: black;")
 					})
 					.catch(err => {
-						console.log("Error logging in", err)
 						this.button_disabled = false;
 						if (err.status == 401) {
 							vm.$store.dispatch("showSnackbar", {

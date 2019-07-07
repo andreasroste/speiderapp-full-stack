@@ -109,22 +109,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => state.auth_status == 'authenticated' ? true : false,
     authStatus: state => state.auth_status,
-    roles: state => {
-      let result = []
-      for (const level in state.roles) {
-        if (state.roles.hasOwnProperty(level)) {
-          const roles_on_level = state.roles[level];
-          if(Object.keys(roles_on_level).length){
-            result.push({
-              level,
-              roles: roles_on_level
-            })
-          }
-          
-        }
-      }
-      return result
-    },
+    roles: state => state.roles,
     user: state => state.user,
     user_memberships: state => {
       let result = []

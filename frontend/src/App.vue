@@ -2,7 +2,9 @@
 	<v-app>
 		<v-progress-circular indeterminate v-if="!this.ready"></v-progress-circular>
 		<div id="app" :style="{ height: appHeight }" v-if="this.ready">
-			<router-view id="approuter"></router-view>
+			<transition name="fade">
+				<router-view id="approuter"></router-view>
+			</transition>
 			<Dockbar id="dockbar" v-if="this.$store.getters.isLoggedIn"></Dockbar>
 		</div>
 		<v-snackbar
@@ -96,9 +98,16 @@
 		font-family: "DINOT";
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		-webkit-user-select: none;
 		-webkit-tap-highlight-color: transparent;
 		-webkit-touch-callout: none;
+	}
+
+	input, input:before, input:after {
+		-webkit-user-select: initial;
+		-khtml-user-select: initial;
+		-moz-user-select: initial;
+		-ms-user-select: initial;
+		user-select: initial;
 	}
 
 	h1 {
@@ -137,6 +146,8 @@
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		padding-top: 26px;
+		display: block;
+		height: 100%;
 	}
 
 	.bg-smaspeider {
