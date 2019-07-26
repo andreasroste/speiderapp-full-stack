@@ -12,6 +12,7 @@ export default new Vuex.Store({
     auth_status: '',
     user: {},
     roles: {},
+    memberships: {},
     snackbar: {
       visible: false,
       timeout: 6000,
@@ -22,10 +23,11 @@ export default new Vuex.Store({
     auth_request(state) {
       state.auth_status = 'loading'
     },
-    auth_success(state, {user, roles}) {
+    auth_success(state, {user, roles, memberships}) {
       state.auth_status = 'authenticated'
       state.user = user
       state.roles = roles
+      state.memberships = memberships
     },
     auth_error(state) {
       state.auth_status = 'error'
@@ -75,8 +77,9 @@ export default new Vuex.Store({
             // Correct credentials
             const user = resp.data.member
             const roles = resp.data.roles
+            const memberships = resp.data.memberships
 
-            commit('auth_success', {user, roles})
+            commit('auth_success', {user, roles, memberships})
 
             resolve()
           })
@@ -111,21 +114,7 @@ export default new Vuex.Store({
     authStatus: state => state.auth_status,
     roles: state => state.roles,
     user: state => state.user,
-    user_memberships: state => {
-      let result = []
-      for (const body in state.user.memberships) {
-        if (state.user.memberships.hasOwnProperty(body)) {
-          let groups = state.user.memberships[body]
-          for (const group in groups) {
-            if (groups.hasOwnProperty(group)) {
-              const element = groups[group];
-              result.push(element.group)
-            }
-          }
-        }
-      }
-      return result
-    },
+    user_memberships: state => state.memberships,
     user_role_ids: state => {
       let result = []
       for (const level in state.roles) {

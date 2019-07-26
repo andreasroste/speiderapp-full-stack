@@ -146,6 +146,7 @@ export default {
             this.loading_site = false;
             this.getAllMembers();
         }else{
+        // TODO: Bruk data fra vuex istedenfor å laste data to ganger.
             this.$http.get('/api/memberships').then(response => {
                 if(response.data.hasOwnProperty('group')){
                     this.groupmemberships = response.data.group

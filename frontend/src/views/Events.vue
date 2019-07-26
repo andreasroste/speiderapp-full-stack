@@ -321,7 +321,7 @@
 				return translated_month;
 			}
 		},
-		created() {
+		mounted() {
 			const events = sessionStorage.getItem("speiding_no_events");
 			if (events) {
 				this.loading = false;

@@ -2,9 +2,9 @@
 	<v-app>
 		<v-progress-circular indeterminate v-if="!this.ready"></v-progress-circular>
 		<div id="app" :style="{ height: appHeight }" v-if="this.ready">
-			<transition name="fade">
+			<div id="routerdiv">
 				<router-view id="approuter"></router-view>
-			</transition>
+			</div>
 			<Dockbar id="dockbar" v-if="this.$store.getters.isLoggedIn"></Dockbar>
 		</div>
 		<v-snackbar
@@ -142,12 +142,17 @@
 	}
 
 	#approuter {
-		flex: 1;
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		padding-top: 26px;
+	}
+
+	#routerdiv {
 		display: block;
 		height: 100%;
+		flex: 1;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	.bg-smaspeider {
