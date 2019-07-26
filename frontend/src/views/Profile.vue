@@ -13,9 +13,12 @@
 			</div>
 			<div class="profilegroup">
 				<span class="profiletitle">Medlemsskap</span>
-				<div class="profilevalue">{{user_memberships}}</div>
+				<div class="profilevalue">
+					<ul>
+						<li v-for="(memship, id) in user_memberships.group" :key="id">{{memship.name}}</li>
+					</ul></div>
 			</div>
-			<div class="profilegroup">
+			<!--<div class="profilegroup">
 				<span class="profiletitle">Roller</span>
 				<div class="profilevalue">
 					<v-card dark v-for="(role, id) in roles" :key="id">
@@ -23,7 +26,7 @@
 						<v-card-text>{{role}}</v-card-text>
 					</v-card>
 				</div>
-			</div>
+			</div>-->
 			<span>Du kan endre profilinnstillingene på <a target="_blank" :href="'https://min.speiding.no/organisation/user/edit_profile/' + user.member_no">min speiding.</a></span>
 			<router-link to="/logout" class="s-btn">Logg ut</router-link>
 		</div>

@@ -73,6 +73,20 @@ module.exports = async (req, res, next) => {
         return res.status(500).json({ message: error.message })
     }
 
+    // Get user's memberships
+    try {
+        const membership_request = await axios.get(scoutneturl + '/api/get/memberships', {
+            headers: {
+                'Authorization': 'Bearer ' + scoutnet_token
+            }
+        })
+
+        result.memberships = membership_request.data
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+
     /*let flatrolesresult = []
     Object.keys(role_request.data).map((level_key) => {
         let level = role_request.data[level_key]
