@@ -8,7 +8,7 @@
 			<h1>Arrangementer</h1>
 		</div>
 		<div class="filtermenu" v-if="filtering">
-			<h3>TYPE</h3>
+			<!--<h3>TYPE</h3>
 			<div class="grid-3">
 				<div :class="{ filtermenubutton: true, filter_active: filters.group }" @click="filters.group = !filters.group">
 					Gruppe
@@ -22,7 +22,7 @@
 				<div :class="{ filtermenubutton: true, filter_active: filters.international }" @click="filters.international = !filters.international">
 					Internasjonalt
 				</div>
-			</div>
+			</div>-->
 			<h3>ALDERSGRUPPE</h3>
 			<div class="grid-3">
 				<div :class="{ filtermenubutton: true, filter_active: filters.smaspeider }" @click="filters.smaspeider = !filters.smaspeider">
