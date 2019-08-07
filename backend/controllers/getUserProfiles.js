@@ -21,8 +21,8 @@ async function group(req, res) {
             })
             res.json(members_request.data).status(200); 
         } catch (error) {
-            rollbar.error(error, req)
-            return res.status(500).json({ message: error.message, token_sent: scoutnet_token })
+            // Har ikke tilgang til medlemslister i gruppe.
+            return res.status(403).json({ message: error.message })
         }
     }else{
         res.status(401).json({
