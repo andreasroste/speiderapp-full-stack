@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const rollbar = require('../helpers/rollbar')
+
 // Denne funksjonen henter ID-er for noder fra speiding.no/arrangementer.
 // Den er nødvendig for å hente arrangementene. (Idiotisk, spør du meg...)
 async function make_id_request() {

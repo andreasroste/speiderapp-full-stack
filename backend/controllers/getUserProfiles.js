@@ -2,6 +2,8 @@ const axios = require('axios')
 // const scoutneturl = "https://min.speiding.no"
 const scoutneturl = "https://n2.test.custard.no"
 
+const rollbar = require('../helpers/rollbar')
+
 async function group(req, res) {
     const scoutnet_token = req.session.user ? (req.session.user.scoutnet_token || false) : false;
     if(!req.params.groupid){

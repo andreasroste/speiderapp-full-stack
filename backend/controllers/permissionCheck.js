@@ -1,3 +1,5 @@
+const rollbar = require('../helpers/rollbar')
+
 module.exports = (req,res) => {
     const scoutnet_token = req.session.user ? (req.session.user.scoutnet_token || false) : false;
     if(scoutnet_token){

@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const rollbar = require('../helpers/rollbar')
+
 module.exports = async (req, res, next) => {
     let event_raw = {};
     try {
