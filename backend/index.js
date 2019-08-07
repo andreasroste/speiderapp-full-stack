@@ -26,6 +26,7 @@ const userProfilesController = require('./controllers/getUserProfiles');
 
 // Routes
 app.post('/login', loginController);
+app.get('/404', (req,res) =>{ res.status(404); rollbar.info('404 was visited.'); })
 app.get('/events', speidingnoeventsController);
 app.get('/event/:id', speidingnosingleeventController);
 app.get('/profileimage', profileController.image);
