@@ -37,6 +37,6 @@ app.post('/logout', (req,res) =>{
 })
 
 
-//app.use(rollbar.errorHandler()) // Handling errors
+app.use(rollbar.errorHandler()) // Handling errors
 
 module.exports = app

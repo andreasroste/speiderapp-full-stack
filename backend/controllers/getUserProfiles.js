@@ -19,6 +19,7 @@ async function group(req, res) {
             })
             res.json(members_request.data).status(200); 
         } catch (error) {
+            rollbar.error(error, req)
             return res.status(500).json({ message: error.message, token_sent: scoutnet_token })
         }
     }else{
@@ -39,6 +40,7 @@ async function troop(req, res) {
             })
             res.json(members_request.data).status(200); 
         } catch (error) {
+            rollbar.error(error, req)
             return res.status(500).json({ message: error.message, token_sent: scoutnet_token })
         }
     }else{

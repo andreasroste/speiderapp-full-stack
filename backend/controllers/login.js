@@ -4,6 +4,8 @@ const scoutneturl = "https://n2.test.custard.no"
 
 const jwt = require('../helpers/jwt')
 
+const rollbar = require('../helpers/rollbar')
+
 module.exports = async (req, res, next) => {
 
     let scoutnet_token = ''
@@ -54,6 +56,7 @@ module.exports = async (req, res, next) => {
         req.session.user.roles = roleresult
 
     } catch (error) {
+        rollbar.error(error, req)
         return res.status(500).json({ message: error.message })
     }
 
@@ -70,6 +73,7 @@ module.exports = async (req, res, next) => {
         result.member = profile_request.data
 
     } catch (error) {
+        rollbar.error(error, req)
         return res.status(500).json({ message: error.message })
     }
 
@@ -84,6 +88,7 @@ module.exports = async (req, res, next) => {
         result.memberships = membership_request.data
 
     } catch (error) {
+        rollbar.error(error, req)
         return res.status(500).json({ message: error.message })
     }
 

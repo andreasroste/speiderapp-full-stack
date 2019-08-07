@@ -91,9 +91,11 @@ module.exports = async (req, res) => {
         if (events) {
             res.status(200).json(events);
         } else {
+            rollbar.error(error, req)
             res.status(500).json({ error: 'get_events.js, make_events_request()' });
         }
     } else {
+        rollbar.error(error, req)
         res.status(500).json({ error: 'get_events.js, make_id_request()' });
     }
 };

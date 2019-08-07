@@ -18,9 +18,11 @@ module.exports = async (req, res, next) => {
             result.end_date = (typeof event_raw.field_event_end_date["0"] === 'undefined') ? '' : new Date(event_raw.field_event_end_date["0"].value);
             res.status(200).json(result);
         }else{
+            rollbar.error(error, req)
             res.status(500).json({error: 'id not specified'});
         }
     } catch (error) {
+        rollbar.error(error, req)
         res.status(500).json({msg: error.msg});
     }
 }

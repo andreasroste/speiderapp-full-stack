@@ -20,6 +20,7 @@ async function image(req, res, next) {
               });
             res.end(image); 
         } catch (error) {
+            rollbar.error(error, req)
             return res.status(500).json({ message: error.message, token_sent: scoutnet_token })
         }
     }else{
@@ -41,6 +42,7 @@ async function memberships(req, res, next) {
             })
             res.json(membership_request.data).status(200); 
         } catch (error) {
+            rollbar.error(error, req)
             return res.status(500).json({ message: error.message, token_sent: scoutnet_token })
         }
     }else{
