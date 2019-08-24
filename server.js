@@ -17,7 +17,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'olavharaldhaakonmagnushansen',
     resave: true,
     saveUninitialized: true,
-    name: 'session_cookie'
+    name: 'session_cookie',
+    expires: new Date(Date.now() + 31536000000),
+    maxAge: 31536000000
 }))
 
 
