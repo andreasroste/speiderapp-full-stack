@@ -1,3 +1,4 @@
+const scoutneturl = process.env.SCOUTNET_URL || "https://min.speiding.no";
 const rollbar = require('../helpers/rollbar')
 
 module.exports = (req,res) => {

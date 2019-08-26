@@ -1,6 +1,5 @@
 const axios = require('axios')
-// const scoutneturl = "https://min.speiding.no"
-const scoutneturl = "https://n2.test.custard.no"
+const scoutneturl = process.env.SCOUTNET_URL || "https://min.speiding.no";
 
 const rollbar = require('../helpers/rollbar')
 
