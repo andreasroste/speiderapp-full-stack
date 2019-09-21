@@ -120,6 +120,9 @@
     .group-card{
         margin-bottom: 20px;
     }
+    .v-card {
+        background-color: rgba(255,255,255,0.5);
+    }
 </style>
 
 
