@@ -52,14 +52,14 @@
                                 <v-icon>face</v-icon><strong>Ledere i enheten</strong>
                                 <ul>
                                     <i>
-                                        <li v-for="(leader, id) in group.troop.role_members" :key="id">{{leader.name}}</li>
+                                        <li v-for="(leader, id) in group.troop.role_members" :key="id">{{leader.name | aeoeaa}}</li>
                                     </i>
                                 </ul>
-                                <v-icon>people</v-icon><strong>Patrulje</strong>: {{group.patrol.name || 'du tilhører ingen patrulje'}}<br>
+                                <v-icon>people</v-icon><strong>Patrulje</strong>: {{(group.patrol.name | aeoeaa) || 'du tilhører ingen patrulje'}}<br>
                                 <v-icon>face</v-icon><strong>Ledere i patruljen</strong>
                                 <ul>
                                     <i>
-                                        <li v-for="(leader, id) in group.patrol.role_members" :key="id">{{leader.name}}</li>
+                                        <li v-for="(leader, id) in group.patrol.role_members" :key="id">{{leader.name | aeoeaa}}</li>
                                     </i>
                                 </ul>
                             </v-card-text>
@@ -117,7 +117,7 @@
 </template>
 
 <style scoped>
-    .group-card{
+    .group-card {
         margin-bottom: 20px;
     }
     .v-card {
