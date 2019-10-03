@@ -92,7 +92,7 @@ export default new Router({
     if (savedPosition) {
       return savedPosition
     } else {
-      return { x: 0, y: 10 }
+      return { x: 0, y: 0 }
     }
   },
 })

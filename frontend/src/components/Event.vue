@@ -1,7 +1,7 @@
 <template>
 	<div class="event">
 		<div class="flex event-meta">
-			<a class="event-name" @click.prevent="$emit('clicked')">{{ title }}</a>
+			<a class="event-name">{{ title }}</a>
 			<div class="event-date">{{ date }}</div>
 		</div>
 		<div class="flex flex-dir">

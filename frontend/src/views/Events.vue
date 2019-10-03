@@ -2,7 +2,7 @@
 	<div>
 		<div class="page-header">
 			<v-btn @click="filtering = !filtering" fab id="filter_btn">
-				<v-icon v-if="!filtering">menu</v-icon>
+				<v-icon v-if="!filtering">filter_list</v-icon>
 				<v-icon v-if="filtering">close</v-icon>
 			</v-btn>
 			<h1>Arrangementer</h1>
@@ -59,7 +59,7 @@
 				:img_url="event.img_url"
 				:body="event.body"
 				:age_groups="event.age_groups"
-				@clicked="gotoEvent(event)"
+				@click.native="gotoEvent(event)"
 			/>
 		</div>
 		<!-- TODO: Gjør denne tilgjengelig for flere enn bare meg. -->
@@ -85,7 +85,10 @@
 	.page-header {
 		padding: 5px;
 		z-index: 100;
-		width: 100%;
+		width: 90vw;
+		margin: 0 auto;
+		max-width: 900px;
+		position: relative;
 	}
 
 	#new_event_btn {
@@ -95,7 +98,7 @@
 	}
 
 	#filter_btn {
-		top: auto;
+		right: 0;
 		height: 40px;
 		width: 40px;
 		display: inline-block;
@@ -129,9 +132,12 @@
 		border: 1px solid rgb(89, 101, 120);
 		text-align: center;
 		display: inline-block;
+		transition: box-shadow 0.4s ease-in-out;
+		transition: background-color 0.4s ease-in-out;
 	}
 	.filter_active {
-		background: red;
+		background-color: #fff;
+		box-shadow: 2px 2px 5px rgba(0,0,0,.5);
 	}
 	.grid-3 {
 		display: grid;

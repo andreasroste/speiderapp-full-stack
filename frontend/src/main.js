@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import './plugins/vuetify'
 import Axios from 'axios'
-import vueScrollPosition from 'vue-scroll-behavior';
+// TODO: Slett import vueScrollPosition from 'vue-scroll-behavior';
 
 import App from './App.vue'
 import router from './router'
@@ -10,10 +10,6 @@ import './registerServiceWorker'
 import store from './store'
 
 Vue.config.productionTip = false
-
-Vue.use(vueScrollPosition, {
-  router
-})
 
 Axios.defaults.withCredentials = true
 Vue.prototype.$http = Axios // Makes axios accessible globally

@@ -84,7 +84,8 @@
 	.box {
 		background: rgba(255, 255, 255, 0.5);
 		border: 1px solid black;
-		border-radius: 20px;
+		border-top: none;
+		border-radius: 0 0 20px 20px;
 		padding: 10px;
 		padding-bottom: 25px;
 		position: relative;

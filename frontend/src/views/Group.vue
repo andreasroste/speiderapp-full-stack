@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="page">
         <h1>Gruppe</h1>
         <v-progress-circular indeterminate v-if="loading_site"></v-progress-circular>
         <v-card v-for="group in groupmemberships" class="group-card" :key="group.id">
             <v-card-text>
                 <h1>{{group.name}}</h1>
-                <span>Du ble medlem i {{group.name}} for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
+                <span class="center">Du ble medlem for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
                 <v-expansion-panel>
                     <v-expansion-panel-content>
                         <template v-slot:header>
@@ -48,14 +48,14 @@
                         </template>
                         <v-card>
                             <v-card-text>
-                                <v-icon>business</v-icon><strong>Enhet</strong>: {{group.troop.name || 'du tilhører ingen enhet'}}<br>
+                                <v-icon>business</v-icon><strong>Enhet</strong>: {{group.troop.name || 'N/A'}}<br>
                                 <v-icon>face</v-icon><strong>Ledere i enheten</strong>
                                 <ul>
                                     <i>
                                         <li v-for="(leader, id) in group.troop.role_members" :key="id">{{leader.name | aeoeaa}}</li>
                                     </i>
                                 </ul>
-                                <v-icon>people</v-icon><strong>Patrulje</strong>: {{(group.patrol.name | aeoeaa) || 'du tilhører ingen patrulje'}}<br>
+                                <v-icon>people</v-icon><strong>Patrulje</strong>: {{(group.patrol.name | aeoeaa) || 'N/A'}}<br>
                                 <v-icon>face</v-icon><strong>Ledere i patruljen</strong>
                                 <ul>
                                     <i>
@@ -123,6 +123,15 @@
     .v-card {
         background-color: rgba(255,255,255,0.5);
     }
+    .center {
+        text-align: center;
+        display: block;
+    }
+    .page {
+		width: 90vw;
+		margin: 10px auto;
+		max-width: 900px;
+	}
 </style>
 
 
