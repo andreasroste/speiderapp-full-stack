@@ -1,7 +1,7 @@
 <template>
 	<div class="site">
 		<div class="center">
-			<img id="logo" src="@/assets/logoutenbakgrunn.png" alt>
+			<img id="logo" src="@/assets/logo.png" alt>
 
 			<form action="/api/login" method="POST" @submit.prevent="login">
 				<input
@@ -101,7 +101,7 @@
 		border: 1px solid black;
 		border-radius: 30px;
 		padding: 10px;
-		width: 60vw;
+		width: 65vw;
 		background: rgba(255, 255, 255, 0.6);
 		max-width: 500px;
 		margin: 10px auto;
