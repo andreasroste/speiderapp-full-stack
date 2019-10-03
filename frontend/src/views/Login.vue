@@ -3,6 +3,8 @@
 		<div class="center">
 			<img id="logo" src="@/assets/logo.png" alt>
 
+			<v-alert type="warning" :value="devmode">Utviklermodus!</v-alert>
+
 			<form action="/api/login" method="POST" @submit.prevent="login">
 				<input
 					type="text"
@@ -47,6 +49,7 @@
 		background: #d5d4d8;
 		position: absolute;
 		margin: 0;
+		padding: 0;
 	}
 
 	.blispeider {
@@ -117,7 +120,8 @@
 			return {
 				username: "",
 				password: "",
-				button_disabled: false
+				button_disabled: false,
+				devmode: process.env.NODE_ENV != 'production'
 			};
 		},
 		methods: {
