@@ -5,7 +5,6 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import Logout from "./views/Logout.vue";
 import Events from "./views/Events.vue";
-import Group from "./views/Group.vue";
 
 Vue.use(Router);
 
@@ -32,6 +31,11 @@ export default new Router({
       path: "/events",
       name: "events",
       component: Events
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: Logout
     }
   ]
 });
