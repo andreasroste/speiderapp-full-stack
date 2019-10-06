@@ -70,7 +70,7 @@ export default {
           this.$store.state.authenticated = true;
           this.$store.dispatch("populateNavDrawer");
 
-          this.$router.push("/");
+          this.$router.push("/group");
         })
         .catch(() => {
           // Feil passord eller no
