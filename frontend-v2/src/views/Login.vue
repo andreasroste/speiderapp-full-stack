@@ -21,6 +21,9 @@
         >Logg inn</v-btn
       >
     </v-form>
+
+    <v-snackbar v-model="wrong_password" color="red" bottom :timeout="5000">Feil passord :/ <v-btn dark text @click="wrong_password = false">Lukk</v-btn></v-snackbar>
+
     <img src="@/assets/logo.png" alt="" />
   </v-container>
 </template>
@@ -45,11 +48,13 @@ export default {
       username: "",
       password: "",
       login_btn_loading: false,
-      devmode: process.env.NODE_ENV != "production"
+      devmode: process.env.NODE_ENV != "production",
+      wrong_password: false
     };
   },
   methods: {
     login_btn_press() {
+      const vm = this;
       this.login_btn_loading = true; // Gjør knappen utrykkelig.
 
       // Prøver å logge inn
@@ -60,7 +65,6 @@ export default {
         })
         .then(res => {
           // Det gikk fint.
-          console.log(res.data);
           this.$store.state.user.data = res.data.member;
           this.$store.state.user.roles = res.data.roles;
           this.$store.state.authenticated = true;
@@ -68,9 +72,10 @@ export default {
 
           this.$router.push("/");
         })
-        .catch(err => {
-          // Noe gikk galt.
-          console.error(err);
+        .catch(() => {
+          // Feil passord eller no
+          vm.wrong_password = true;
+          vm.login_btn_loading = false;
         });
     }
   }
