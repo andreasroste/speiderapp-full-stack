@@ -52,16 +52,16 @@ export default new Vuex.Store({
         let jsonrole = JSON.stringify(role);
 
         // Legg til element hvis brukeren har en viss rolle på et visst nivå.
-        /*if (
+        if (
           jsonrole ==
-          JSON.stringify({ level: "group", key: "assistant_leader" })
+          JSON.stringify({ level: "group", key: "assistant_leaderfinnesikke" })
         ) {
           elements.push({
             title: "Admin gruppe",
             link: "/group/admin",
             iconlink: "profil.png"
           });
-        }*/
+        }
       });
 
       elements.push({
