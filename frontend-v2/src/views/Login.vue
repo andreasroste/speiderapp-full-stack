@@ -1,6 +1,9 @@
 <template>
   <v-container>
     <h2>Velkommen!</h2>
+
+    <v-alert type="warning" :value="devmode">Utviklermodus!</v-alert>
+
     <p>Logg inn med brukernavnet og passordet du har på Min speiding.</p>
     <v-form>
       <v-text-field v-model="username" label="Brukernavn"></v-text-field>
@@ -41,7 +44,8 @@ export default {
     return {
       username: "",
       password: "",
-      login_btn_loading: false
+      login_btn_loading: false,
+      devmode: process.env.NODE_ENV != "production"
     };
   },
   methods: {

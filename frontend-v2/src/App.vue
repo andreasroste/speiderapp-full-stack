@@ -4,15 +4,16 @@
     <v-app-bar color="primary" dark app>
       <v-app-bar-nav-icon
         @click.stop="drawer_state = !drawer_state"
+        v-if="user_full_name != ''"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>Speiderapp</v-toolbar-title>
     </v-app-bar>
 
     <!-- Sidemeny -->
     <v-navigation-drawer v-model="drawer_state" absolute app temporary>
-      <v-list-item>
+      <v-list-item v-if="user_full_name != ''">
         <v-list-item-content>
-          <v-list-item-title>Andreas Røste</v-list-item-title>
+          <v-list-item-title>{{ user_full_name }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -29,7 +30,7 @@
             <v-img
               width="24px"
               height="24px"
-              :src="require('./assets/icons/' + item.iconlink)"
+              :src="require('@/assets/icons/' + item.iconlink)"
               v-if="item.iconlink != ''"
             ></v-img>
             <v-icon v-if="item.icon != ''">{{ item.icon }}</v-icon>

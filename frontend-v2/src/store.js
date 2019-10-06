@@ -80,7 +80,10 @@ export default new Vuex.Store({
   },
   getters: {
     user_full_name(state) {
-      if (state.user.data) {
+      if (
+        typeof state.user.data.first_name != "undefined" &&
+        typeof state.user.data.last_name != "undefined"
+      ) {
         return state.user.data.first_name + " " + state.user.data.last_name;
       } else {
         return "";
