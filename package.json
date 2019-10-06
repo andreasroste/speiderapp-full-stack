@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend",
-    "build": "cd frontend && npm run build"
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend-v2",
+    "build": "cd frontend-v2 && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -38,6 +38,7 @@
     "vuetify": "^1.5.7",
     "vuetify-loader": "^1.2.1",
     "vuex": "^3.0.1",
+    "vuex-persist": "^2.1.0",
     "vuex-persistedstate": "^2.5.4",
     "yes-https": "^1.0.0"
   },
