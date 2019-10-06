@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h1>Profil</h1>
-    <v-img src="/api/profileimage"></v-img>
+    <img src="/api/profileimage"></img>
   </v-container>
 </template>
 

@@ -27,13 +27,14 @@
           :to="item.link"
         >
           <v-list-item-icon>
-            <v-img
-              width="24px"
-              height="24px"
-              :src="require('@/assets/icons/' + item.iconlink)"
-              v-if="item.iconlink != ''"
-            ></v-img>
-            <v-icon v-if="item.icon != ''">{{ item.icon }}</v-icon>
+            <div v-if="typeof item.iconlink != 'undefined'">
+              <v-img
+                width="24px"
+                height="24px"
+                :src="require('./assets/icons/' + item.iconlink)"
+              ></v-img>
+            </div>
+            <v-icon v-if="typeof item.icon != 'undefined'">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>

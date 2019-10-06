@@ -67,7 +67,7 @@ export default new Vuex.Store({
       elements.push({
         title: "Logg ut",
         link: "/logout",
-        icon: "power_settings_new"
+        icon: "mdi-lock"
       });
 
       state.drawer_items = elements;
