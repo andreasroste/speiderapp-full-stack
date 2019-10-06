@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 
 var rollbar = require('./helpers/rollbar') // Logger
 
@@ -14,6 +15,9 @@ const cors = require('cors')
 app.use(cors({
   credentials: true
 }));
+
+// Configure Morgan
+app.use(morgan('combined'));
 
 
 // Controllers
@@ -35,6 +39,11 @@ app.get('/getmembers/group/:groupid', userProfilesController.group);
 app.post('/logout', (req,res) =>{
   req.session.destroy();
   res.status(200);
+})
+app.get('/session', (req,res) => {
+  res.status(200).json({
+    session: req.session
+  })
 })
 
 

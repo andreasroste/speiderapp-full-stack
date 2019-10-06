@@ -52,7 +52,7 @@ export default new Vuex.Store({
         let jsonrole = JSON.stringify(role);
 
         // Legg til element hvis brukeren har en viss rolle på et visst nivå.
-        if (
+        /*if (
           jsonrole ==
           JSON.stringify({ level: "group", key: "assistant_leader" })
         ) {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
             link: "/group/admin",
             iconlink: "profil.png"
           });
-        }
+        }*/
       });
 
       elements.push({
@@ -88,6 +88,13 @@ export default new Vuex.Store({
       } else {
         return "";
       }
+    },
+    contact_info(state) {
+      let info = [];
+      for (var key in state.user.data.contact_info) {
+        info.push(state.user.data.contact_info[key]);
+      }
+      return info;
     }
   },
   actions: {

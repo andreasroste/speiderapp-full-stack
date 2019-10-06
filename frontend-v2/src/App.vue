@@ -12,6 +12,9 @@
     <!-- Sidemeny -->
     <v-navigation-drawer v-model="drawer_state" absolute app temporary>
       <v-list-item v-if="user_full_name != ''">
+        <v-list-item-avatar>
+          <v-img src="/api/profileimage"></v-img>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>{{ user_full_name }}</v-list-item-title>
         </v-list-item-content>
