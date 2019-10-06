@@ -32,11 +32,6 @@ export default new Router({
       path: "/events",
       name: "events",
       component: Events
-    },
-    {
-      path: "/group",
-      name: "group",
-      component: Group
     }
   ]
 });
