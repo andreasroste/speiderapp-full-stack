@@ -59,7 +59,7 @@
 <style scoped>
 @font-face {
   font-family: "DINOT";
-  src: url("/assets/fonts/dinot.otf");
+  src: url("assets/fonts/dinot.otf");
 }
 * {
   font-family: "DINOT";

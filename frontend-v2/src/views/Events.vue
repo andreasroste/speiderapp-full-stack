@@ -2,7 +2,7 @@
   <div>
     <div class="page-header">
       <v-btn @click="filtering = !filtering" fab id="filter_btn">
-        <v-icon v-if="!filtering">mdi-filter_list</v-icon>
+        <v-icon v-if="!filtering">mdi-filter-variant</v-icon>
         <v-icon v-if="filtering">mdi-close</v-icon>
       </v-btn>
       <h1>Arrangementer</h1>
