@@ -47,6 +47,11 @@ export default new Vuex.Store({
         link: "/profile",
         iconlink: "profil.png"
       });
+      elements.push({
+        title: "Spill",
+        link: "/memory",
+        iconlink: "gamepad"
+      });
 
       user_unique_roles.forEach(role => {
         let jsonrole = JSON.stringify(role);

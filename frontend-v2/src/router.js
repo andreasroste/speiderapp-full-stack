@@ -7,6 +7,7 @@ import Logout from "./views/Logout.vue";
 import Events from "./views/Events.vue";
 import EventsInfo from "./views/Event_info.vue";
 import Group from "./views/Group.vue";
+import Memory from "./views/Memory.vue";
 
 Vue.use(Router);
 
@@ -48,6 +49,11 @@ export default new Router({
       path: "/group",
       name: "group",
       component: Group
+    },
+    {
+      path: "/memory",
+      name: "memory",
+      component: Memory
     }
   ]
 });
