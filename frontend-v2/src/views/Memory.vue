@@ -153,6 +153,7 @@ export default {
                     // Henrik
                     image: false,
                     content: "Henrik",
+                    flipped: false,
                     matchid: 8,
                     done: false
                 }
