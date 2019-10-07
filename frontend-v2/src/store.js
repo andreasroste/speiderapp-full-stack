@@ -50,7 +50,7 @@ export default new Vuex.Store({
       elements.push({
         title: "Spill",
         link: "/memory",
-        iconlink: "gamepad"
+        icon: "gamepad"
       });
 
       user_unique_roles.forEach(role => {
