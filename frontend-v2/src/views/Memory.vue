@@ -191,6 +191,7 @@ export default {
 
             if(this.pause) return;
             if(this.firstId == id) return;
+            if(item.done) return;
 
             if(this.first == 0){
                 // Første trykk
