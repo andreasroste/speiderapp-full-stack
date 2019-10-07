@@ -12,6 +12,7 @@
           <v-expansion-panel>
             <v-expansion-panel-header>Kontaktinformasjon</v-expansion-panel-header>
             <v-expansion-panel-content>
+              <v-btn text block color="secondary" small :href="'https://min.speiding.no/organisation/user/edit_profile/' + user_member_no">Endre kontaktinfo på Min speiding</v-btn>
               <v-list>
                 <div v-for="info in contactinfo" :key="info.id">
                   <v-subheader>{{ info.label }}</v-subheader>
