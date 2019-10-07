@@ -22,6 +22,8 @@
       >
     </v-form>
 
+    <v-btn class="promo" text block href="https://blispeider.no">Les om speiding her</v-btn>
+
     <v-snackbar v-model="wrong_password" color="red" bottom :timeout="5000">Feil passord :/ <v-btn dark text @click="wrong_password = false">Lukk</v-btn></v-snackbar>
 
     <img src="@/assets/logo.png" alt="" />
@@ -38,6 +40,9 @@ img {
   margin: 0 auto;
   display: block;
   margin-top: 50px;
+}
+.promo {
+  margin-top: 20px;
 }
 </style>
 
