@@ -139,12 +139,14 @@ h3 {
   padding: 0 15px;
 }
 .filtermenu {
-  width: 100%;
+  width: 90vw;
+  margin: 10px auto;
+  max-width: 900px;
   display: block;
   background: #eee;
   padding: 10px;
   position: fixed;
-  top: 100px;
+  top: 150px;
   left: 0;
   right: 0;
   z-index: 10;

@@ -28,8 +28,8 @@
         <div class="desc" v-if="event.desc">{{ event.desc }}</div>
         <br />
         <div v-if="event.body" v-html="event.body"></div>
+        <v-btn v-if="event.registration_link" :href="event.registration_link" tile block color="success"><v-icon left>mdi-check</v-icon> Gå til påmelding</v-btn>
       </div>
-      <v-btn v-if="event.registration_link" :href="event.registration_link">Gå til påmelding</v-btn>
     </div>
   </div>
 </template>

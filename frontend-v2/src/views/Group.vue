@@ -5,6 +5,9 @@
 			indeterminate
 			v-if="loading_site"
 		></v-progress-circular>
+		<v-alert type="warning" v-if="!loading_site && !groupmemberships">
+			Du er ikke medlem av noen speidergrupper.
+		</v-alert>
 		<v-card
 			v-for="group in groupmemberships"
 			class="group-card"
