@@ -1,4 +1,7 @@
 const axios = require('axios')
+const Storage = require('node-storage');
+const store = new Storage('../storage.json');
+
 const scoutneturl = process.env.SCOUTNET_URL || "https://n2.test.custard.no";
 
 const rollbar = require('../helpers/rollbar')
@@ -22,8 +25,6 @@ module.exports = async (req, res, next) => {
     } catch (error) {
         return res.status(401).json({ message: error.message })
     }
-
-
 
     // Get user's roles
     try {
@@ -58,7 +59,6 @@ module.exports = async (req, res, next) => {
     }
 
 
-
     // Get user's profile
     try {
         const profile_request = await axios.get(scoutneturl + '/api/get/profile', {
@@ -73,6 +73,14 @@ module.exports = async (req, res, next) => {
         rollbar.error(error, req)
         return res.status(500).json({ message: error.message })
     }
+
+
+    // Log new user
+    if(typeof store.get('loggedin.' + result.member.member_no) == 'undefined'){
+        rollbar.info('Ny innlogging: ' + result.member.member_no);
+        store.put('loggedin.' + result.member.member_no, true);
+    }
+
 
     // Get user's memberships
     try {
