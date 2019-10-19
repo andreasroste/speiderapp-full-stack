@@ -39,36 +39,42 @@
                     <v-expansion-panels>
                         <v-expansion-panel v-for="member in groupmembers[group.id].members" :key="member.member_no">
                             <v-expansion-panel-header>
-                                [{{member.member_no}}] {{member.name | aeoeaa}}
+                                {{member.name | aeoeaa}}
                                 <span style="color: #97282e;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">&nbsp;(sjekk politiattest) </span>
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <v-simple-table>
                                     <template v-slot:default>
                                         <tbody>
-                                            <tr>
+                                            <tr v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
                                                 <td class="font-weight-bold">Politiattest</td>
                                                 <td>
-                                                    <span v-if="!member.police_check.required" style="color: #63ac3b;">Trengs ikke. Alt i orden :)</span>
-                                                    <span v-if="member.police_check.required">
-                                                        <span v-if="member.police_check.summary == 'Gyldig'"><span style="color: #63ac3b;">Alt i orden! :)</span></span>
-                                                        <span v-if="member.police_check.summary != 'Gyldig'"><span style="color: #97282e;">Mangler</span></span>
-                                                    </span>
+													<span style="color: #97282e;">Mangler</span>
                                                 </td>
-                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td class="font-weight-bold">E-postadresse</td>
-                                                <td>{{member.primary_email}}</td>
-                                                <td><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn></td>
+                                                <td>
+													{{member.primary_email}}
+													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn>
+												</td>
                                             </tr>
                                             <tr v-for="(info, id) in member.contact_info" :key="id">
                                                 <td class="font-weight-bold">{{typeidtotype(info.type_id, group.id) | aeoeaa}}</td>
-                                                <td>{{info.value | aeoeaa}}</td>
-                                                <td v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35"><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'tel:' + info.value" ><v-icon dark>mdi-phone</v-icon></v-btn></td>
-                                                <td v-if="info.type_id == 13 || info.type_id == 15"><v-btn fab small style="background: #63ac3b; color: #fff;" :href="'mailto:' + info.value"><v-icon dark>mdi-email</v-icon></v-btn></td>
-                                                <td v-else></td>
+                                                <td>
+													{{info.value | aeoeaa}}
+													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'tel:' + info.value" v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35">
+														<v-icon dark>mdi-phone</v-icon>
+													</v-btn>
+													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + info.value" v-if="info.type_id == 13 || info.type_id == 15">
+														<v-icon dark>mdi-email</v-icon>
+													</v-btn>
+												</td>
                                             </tr>
+											<tr>
+												<td class="font-weight-bold">Medlemsnummer</td>
+												<td>{{member.member_no}}</td>
+											</tr>
                                         </tbody>
                                     </template>
                                 </v-simple-table>
