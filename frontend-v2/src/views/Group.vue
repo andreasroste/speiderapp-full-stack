@@ -53,22 +53,27 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="font-weight-bold">E-postadresse</td>
+                                                <td class="font-weight-bold">
+													E-postadresse
+													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn>
+
+												</td>
                                                 <td>
 													{{member.primary_email}}
-													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn>
 												</td>
                                             </tr>
                                             <tr v-for="(info, id) in member.contact_info" :key="id">
-                                                <td class="font-weight-bold">{{typeidtotype(info.type_id, group.id) | aeoeaa}}</td>
-                                                <td>
-													{{info.value | aeoeaa}}
-													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'tel:' + info.value" v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35">
+                                                <td class="font-weight-bold">
+													{{typeidtotype(info.type_id, group.id) | aeoeaa}}
+													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'tel:' + info.value" v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35">
 														<v-icon dark>mdi-phone</v-icon>
 													</v-btn>
-													<v-btn fab small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + info.value" v-if="info.type_id == 13 || info.type_id == 15">
+													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + info.value" v-if="info.type_id == 13 || info.type_id == 15">
 														<v-icon dark>mdi-email</v-icon>
 													</v-btn>
+												</td>
+                                                <td>
+													{{info.value | aeoeaa}}
 												</td>
                                             </tr>
 											<tr>
