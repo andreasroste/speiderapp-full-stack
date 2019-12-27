@@ -8,6 +8,7 @@ import Events from "./views/Events.vue";
 import EventsInfo from "./views/Event_info.vue";
 import Group from "./views/Group.vue";
 import Memory from "./views/Memory.vue";
+import Blogg from "./views/Blogg.vue";
 
 Vue.use(Router);
 
@@ -54,6 +55,11 @@ export default new Router({
       path: "/memory",
       name: "memory",
       component: Memory
+    },
+    {
+      path: '/om',
+      name: 'om',
+      component: Blogg
     }
   ]
 });

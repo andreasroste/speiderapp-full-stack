@@ -52,6 +52,11 @@ export default new Vuex.Store({
         link: "/memory",
         icon: "mdi-gamepad"
       });
+      elements.push({
+        title: "Om appen",
+        link: "/om",
+        icon: "mdi-information"
+      });
 
       user_unique_roles.forEach(role => {
         let jsonrole = JSON.stringify(role);
