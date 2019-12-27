@@ -10,14 +10,14 @@
 
             <v-tab-item key="1">
                 <v-card flat tile>
-                    <v-card-title>Denne versjonen (beta-v0.1)</v-card-title>
+                    <v-card-title>Denne versjonen (beta-v0.2)</v-card-title>
                     <v-card-text>
                         Nye funksjoner i denne versjonen:
                         <ul>
-                            <li>Gruppeledere kan hente ut enkel kontaktinformasjon om speiderne sine (ut i fra tilgangene til brukeren som logger inn)</li>
-                            <li>Brukerne kan finne arrangementene fra speiding.no.</li>
-                            <li>Speiderne kan se sin egen profil for å se om det trengs å gjøre endringer.</li>
-                            <li>Memory-spill med speiderstyret :)</li>
+                            <li>Om-side (den du er på nå :))</li>
+                            <li>Tabs for å bytte mellom gruppene hvis man er medlem i flere grupper.</li>
+                            <li>Enhetsmarkeringer på arrangementene</li>
+                            <li>Røde utropstegn - for å markere fare - på de som ikke har politiattesten i orden.</li>
                         </ul>
                     </v-card-text>
                 </v-card>
@@ -25,7 +25,7 @@
             <v-tab-item key="2">
                 <v-card flat tile>
                     <v-card-title>
-                        Neste versjon (beta-v0.2)
+                        Neste versjon (beta-v0.3)
                     </v-card-title>
                     <v-card-text>
                         I neste versjon kan du vente deg;

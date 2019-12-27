@@ -8,87 +8,101 @@
 		<v-alert type="warning" v-if="!loading_site && !groupmemberships">
 			Du er ikke medlem av noen speidergrupper.
 		</v-alert>
-		<v-card
-			v-for="group in groupmemberships"
-			class="group-card"
-			:key="group.id"
-		>
-            <v-card-title>{{group.name}}</v-card-title>
-            <v-card-text>
-                <span>Du ble medlem for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
-                <v-expansion-panels>
-                    <v-expansion-panel>
-                        <v-expansion-panel-header>Ledere</v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                            <strong>Gruppeleder</strong>: {{getGroupLeader(group.role_members).name | aeoeaa}}<br>
-                            <strong>Gruppestyret</strong>:
-                            <ul>
-                                <li v-for="member in getBoardMembers(group.role_members)" :key="member.member_no">{{member.name | aeoeaa}}</li>
-                            </ul>
-                            <br>
-                            <strong>Alle ledere</strong>
-                            <ul v-for="(leader, id) in group.role_members" :key="id">
-                                <li>{{leader.name | aeoeaa}}</li>
-                            </ul>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                </v-expansion-panels>
 
-                <div v-if="groupmembers.hasOwnProperty(group.id)">
-                    <h2>Medlemmer</h2>
-                    <v-expansion-panels>
-                        <v-expansion-panel v-for="member in groupmembers[group.id].members" :key="member.member_no">
-                            <v-expansion-panel-header>
-                                {{member.name | aeoeaa}}
-                                <span style="color: #97282e;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">&nbsp;(sjekk politiattest) </span>
-                            </v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                        <tbody>
-                                            <tr v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
-                                                <td class="font-weight-bold">Politiattest</td>
-                                                <td>
-													<span style="color: #97282e;">Mangler</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">
-													E-postadresse
-													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn>
 
-												</td>
-                                                <td>
-													{{member.primary_email}}
-												</td>
-                                            </tr>
-                                            <tr v-for="(info, id) in member.contact_info" :key="id">
-                                                <td class="font-weight-bold">
-													{{typeidtotype(info.type_id, group.id) | aeoeaa}}
-													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'tel:' + info.value" v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35">
-														<v-icon dark>mdi-phone</v-icon>
-													</v-btn>
-													<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + info.value" v-if="info.type_id == 13 || info.type_id == 15">
-														<v-icon dark>mdi-email</v-icon>
-													</v-btn>
-												</td>
-                                                <td>
-													{{info.value | aeoeaa}}
-												</td>
-                                            </tr>
-											<tr>
-												<td class="font-weight-bold">Medlemsnummer</td>
-												<td>{{member.member_no}}</td>
-											</tr>
-                                        </tbody>
-                                    </template>
-                                </v-simple-table>
-                            </v-expansion-panel-content>
-                        </v-expansion-panel>
-                    </v-expansion-panels>
-                </div>
-            </v-card-text>
-		</v-card>
+		<v-tabs v-if="!loading_site && !!groupmemberships">
+			<v-tab v-for="group in groupmemberships" :key="group.id">{{group.name}}</v-tab>
+
+			<v-tab-item v-for="group in groupmemberships" :key="group.id">
+				<v-card tile flat>
+					<!-- <v-card-title>{{group.name}}</v-card-title> -->
+					<v-card-text>
+						<span>Du ble medlem for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
+						<v-expansion-panels>
+							<v-expansion-panel>
+								<v-expansion-panel-header>Ledere</v-expansion-panel-header>
+								<v-expansion-panel-content>
+									<strong>Gruppeleder</strong>: {{getGroupLeader(group.role_members).name | aeoeaa}}<br>
+									<strong>Gruppestyret</strong>:
+									<ul>
+										<li v-for="member in getBoardMembers(group.role_members)" :key="member.member_no">{{member.name | aeoeaa}}</li>
+									</ul>
+									<br>
+									<strong>Alle ledere</strong>
+									<ul v-for="(leader, id) in group.role_members" :key="id">
+										<li>{{leader.name | aeoeaa}}</li>
+									</ul>
+								</v-expansion-panel-content>
+							</v-expansion-panel>
+						</v-expansion-panels>
+
+						<div v-if="groupmembers.hasOwnProperty(group.id)">
+							<h2>Medlemmer</h2>
+							<v-expansion-panels>
+								<v-expansion-panel v-for="member in groupmembers[group.id].members" :key="member.member_no">
+									<v-expansion-panel-header>
+										{{member.name | aeoeaa}}
+										<v-badge color="red" style="color: #97282e;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
+											<template v-slot:badge>
+												<span>!</span>
+											</template>
+										</v-badge>
+									</v-expansion-panel-header>
+									<v-expansion-panel-content>
+										<v-simple-table>
+											<template v-slot:default>
+												<tbody>
+													<tr v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
+														<td class="font-weight-bold">Politiattest</td>
+														<td>
+															<span style="color: #97282e;">Mangler</span>
+														</td>
+													</tr>
+													<tr>
+														<td class="font-weight-bold">
+															E-postadresse
+															<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + member.primary_email"><v-icon dark>mdi-email</v-icon></v-btn>
+
+														</td>
+														<td>
+															{{member.primary_email}}
+														</td>
+													</tr>
+													<tr v-for="(info, id) in member.contact_info" :key="id">
+														<td class="font-weight-bold">
+															{{typeidtotype(info.type_id, group.id) | aeoeaa}}
+															<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'tel:' + info.value" v-if="info.type_id == 1 || info.type_id == 2 || info.type_id == 34 || info.type_id == 35">
+																<v-icon dark>mdi-phone</v-icon>
+															</v-btn>
+															<v-btn fab x-small style="background: #63ac3b; color: #fff; margin-left: 10px;" :href="'mailto:' + info.value" v-if="info.type_id == 13 || info.type_id == 15">
+																<v-icon dark>mdi-email</v-icon>
+															</v-btn>
+														</td>
+														<td>
+															{{info.value | aeoeaa}}
+														</td>
+													</tr>
+													<tr>
+														<td class="font-weight-bold">Medlemsnummer</td>
+														<td>{{member.member_no}}</td>
+													</tr>
+												</tbody>
+											</template>
+										</v-simple-table>
+									</v-expansion-panel-content>
+								</v-expansion-panel>
+							</v-expansion-panels>
+						</div>
+					</v-card-text>
+				</v-card>
+			</v-tab-item>
+		</v-tabs>
+
+
+
+
+
+		
 	</v-container>
 </template>
 

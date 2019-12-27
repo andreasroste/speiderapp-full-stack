@@ -97,4 +97,16 @@
 		margin-right: 5px;
 		border-radius: 40%;
 	}
+	.bg-smaspeider {
+		background-color: #f2cc07;
+	}
+	.bg-vandrer {
+		background-color: #63ac3b;
+	}
+	.bg-rover {
+		background-color: #751052;
+	}
+	.bg-leder {
+		background-color: #2baccc;
+	}
 </style>

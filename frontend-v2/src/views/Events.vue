@@ -189,7 +189,7 @@ export default {
   },
   data: () => {
     return {
-      events: {},
+      events: [],
       filters: {
         group: false,
         district: false,
