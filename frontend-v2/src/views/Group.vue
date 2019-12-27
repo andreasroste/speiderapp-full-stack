@@ -10,7 +10,7 @@
 		</v-alert>
 
 
-		<v-tabs v-if="!loading_site && !!groupmemberships">
+		<v-tabs center-active centered color="primary" show-arrows v-if="!loading_site && !!groupmemberships">
 			<v-tab v-for="group in groupmemberships" :key="group.id">{{group.name}}</v-tab>
 
 			<v-tab-item v-for="group in groupmemberships" :key="group.id">

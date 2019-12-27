@@ -1,12 +1,13 @@
 <template>
     <v-container>
         <h1>Om appen</h1>
-        <v-tabs>
+        <v-tabs center-active centered color="primary" show-arrows>
             <v-tab key="1">Denne versjonen</v-tab>
             <v-tab key="2">Neste versjon</v-tab>
             <v-tab key="3">Forslag</v-tab>
             <v-tab key="4">Kontakt</v-tab>
 
+            <v-tabs-slider></v-tabs-slider>
 
             <v-tab-item key="1">
                 <v-card flat tile>
