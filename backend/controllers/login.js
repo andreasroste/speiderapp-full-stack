@@ -76,10 +76,10 @@ module.exports = async (req, res, next) => {
 
 
     // Log new user
-    if(typeof store.get('loggedin.' + result.member.member_no) == 'undefined'){
+    /*if(typeof store.get('loggedin.' + result.member.member_no) == 'undefined'){
         rollbar.info('Ny innlogging: ' + result.member.member_no);
         store.put('loggedin.' + result.member.member_no, true);
-    }
+    }*/
 
 
     // Get user's memberships

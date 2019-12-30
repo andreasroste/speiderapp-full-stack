@@ -62,6 +62,13 @@
                                 E-post: andreas@rugge.org
                             </v-card-text>
                         </v-card>
+                        <v-card>
+                            <v-card-title><h6>Line Aas Mjøster</h6></v-card-title>
+                            <v-card-text>
+                                <b>Prosjekteier på forbundskontoret</b><br>
+                                E-post: line.aas.mjoster@speiding.no
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
                 </v-card>
             </v-tab-item>

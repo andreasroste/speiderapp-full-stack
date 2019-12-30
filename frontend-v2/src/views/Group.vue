@@ -42,7 +42,7 @@
 								<v-expansion-panel v-for="member in groupmembers[group.id].members" :key="member.member_no">
 									<v-expansion-panel-header>
 										{{member.name | aeoeaa}}
-										<v-badge color="red" style="color: #97282e;" v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
+										<v-badge color="red" style="color: #97282e;" v-if="member.police_check.required && member.police_check.valid_group_checks < 1 && member.police_check.valid_other_checks < 1">
 											<template v-slot:badge>
 												<span>!</span>
 											</template>
@@ -52,7 +52,7 @@
 										<v-simple-table>
 											<template v-slot:default>
 												<tbody>
-													<tr v-if="member.police_check.summary != 'Gyldig' && member.police_check.required">
+													<tr v-if="member.police_check.required && member.police_check.valid_group_checks < 1 && member.police_check.valid_other_checks < 1">
 														<td class="font-weight-bold">Politiattest</td>
 														<td>
 															<span style="color: #97282e;">Mangler</span>
