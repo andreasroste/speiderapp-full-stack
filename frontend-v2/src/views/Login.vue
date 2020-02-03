@@ -72,6 +72,7 @@ export default {
           // Det gikk fint.
           this.$store.state.user.data = res.data.member;
           this.$store.state.user.roles = res.data.roles;
+          this.$store.state.user.app_access = res.data.app_access;
           this.$store.state.authenticated = true;
           this.$store.dispatch("populateNavDrawer");
 

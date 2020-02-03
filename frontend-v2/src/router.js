@@ -9,6 +9,9 @@ import EventsInfo from "./views/Event_info.vue";
 import Group from "./views/Group.vue";
 import Memory from "./views/Memory.vue";
 import Blogg from "./views/Blogg.vue";
+import ForumHome from "./views/Forum_home.vue";
+import ForumPost from "./views/Forum_post.vue";
+import ForumCategory from "./views/Forum_category.vue";
 
 Vue.use(Router);
 
@@ -60,6 +63,21 @@ export default new Router({
       path: '/om',
       name: 'om',
       component: Blogg
+    },
+    {
+      path: '/forum',
+      name: 'forum',
+      component: ForumHome
+    },
+    {
+      path: '/forum/post/:id',
+      name: 'forumpost',
+      component: ForumPost
+    },
+    {
+      path: '/forum/category/:id',
+      name: 'forumcategory',
+      component: ForumCategory
     }
   ]
 });

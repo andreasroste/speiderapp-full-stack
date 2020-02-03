@@ -19,7 +19,10 @@ module.exports = async (req, res, next) => {
             password: req.body.password
         })
         req.session.user = {
-            scoutnet_token: auth_request.data.token
+            scoutnet_token: auth_request.data.token,
+            app_access: [],
+            full_name: '',
+            member_no: auth_request.data.member.member_no
         }
         scoutnet_token = auth_request.data.token
     } catch (error) {
@@ -68,6 +71,15 @@ module.exports = async (req, res, next) => {
         })
 
         result.member = profile_request.data
+
+        let app_access = Object.values(profile_request.data['contact_info']).map(c => {
+            if(c['type_id']==54) return c['value']; // Type ID Min speiding kontaktfelt
+            else return null;
+        }).filter(e => e != null);
+
+        req.session.user['app_access'] = app_access;
+        req.session.user['full_name'] = profile_request.data['first_name'] + " " + profile_request.data['last_name'];
+        result.app_access = app_access;
 
     } catch (error) {
         rollbar.error(error, req)

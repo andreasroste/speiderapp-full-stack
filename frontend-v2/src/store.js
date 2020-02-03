@@ -53,6 +53,11 @@ export default new Vuex.Store({
         icon: "mdi-gamepad"
       });
       elements.push({
+        title: "Forum",
+        link: "/forum",
+        icon: "mdi-forum"
+      });
+      elements.push({
         title: "Om appen",
         link: "/om",
         icon: "mdi-information"

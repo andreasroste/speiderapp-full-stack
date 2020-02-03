@@ -1,8 +1,20 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const mongoose = require('mongoose');
 
 var rollbar = require('./helpers/rollbar') // Logger
+
+
+// Mongoose
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_zvk6tbc1:m8kao2cj6r12g65ml2ejulpcos@ds055842.mlab.com:55842/heroku_zvk6tbc1', (err) => {
+  if(err) throw err;
+});
+
 
 
 // Middleware
@@ -26,6 +38,7 @@ const speidingnoeventsController = require('./controllers/speidingnoevents');
 const speidingnosingleeventController = require('./controllers/speidingnosingleevent');
 const profileController = require('./controllers/profileController');
 const userProfilesController = require('./controllers/getUserProfiles');
+const forumController = require('./controllers/forum');
 
 
 // Routes
@@ -35,6 +48,11 @@ app.get('/events', speidingnoeventsController);
 app.get('/event/:id', speidingnosingleeventController);
 app.get('/profileimage', profileController.image);
 app.get('/memberships', profileController.memberships);
+app.get('/forum/cats', forumController.getCategories);
+app.get('/forum/traads', forumController.getPosts);
+app.post('/forum/create/category', forumController.createCategory);
+app.post('/forum/create/post', forumController.createPost);
+app.post('/forum/create/comment', forumController.createComment);
 app.get('/getmembers/group/:groupid', userProfilesController.group);
 app.post('/logout', (req,res) =>{
   req.session.destroy();
