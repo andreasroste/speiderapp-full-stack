@@ -52,11 +52,11 @@ export default new Vuex.Store({
         link: "/memory",
         icon: "mdi-gamepad"
       });
-      elements.push({
+      /*elements.push({
         title: "Forum",
         link: "/forum",
         icon: "mdi-forum"
-      });
+      });*/
       elements.push({
         title: "Om appen",
         link: "/om",
