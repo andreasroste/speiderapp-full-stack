@@ -17,11 +17,11 @@
           {{ event.location }}
         </div>
         <div v-if="event.date">
-          <v-icon>date_range</v-icon>
+          <v-icon>mdi-calendar</v-icon>
           {{ event.date }}
         </div>
         <div v-if="event.fee">
-          <v-icon>attach_money</v-icon>
+          <v-icon>mdi-cash</v-icon>
           {{ event.fee }}
         </div>
         <br />

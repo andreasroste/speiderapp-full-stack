@@ -59,7 +59,7 @@
                             <v-card-title><h6>Andreas Røste</h6></v-card-title>
                             <v-card-text>
                                 <b>Prosjektleder / utvikler</b><br>
-                                E-post: andreas@rugge.org
+                                E-post: andreas.roste@speiding.no
                             </v-card-text>
                         </v-card>
                         <v-card>
