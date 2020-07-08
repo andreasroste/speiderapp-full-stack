@@ -2,7 +2,8 @@ const axios = require('axios')
 const Storage = require('node-storage');
 const store = new Storage('../storage.json');
 
-const scoutneturl = process.env.SCOUTNET_URL || "https://n2.test.custard.no";
+const scoutneturl = process.env.SCOUTNET_URL || "https://min.speiding.no";
+// const msuuid = process.env.MIN_SPEIDING_UUID || "etlangtogrartuttrykkmedtallbarese123";
 
 const rollbar = require('../helpers/rollbar')
 
@@ -11,16 +12,14 @@ module.exports = async (req, res, next) => {
     let scoutnet_token = ''
     let result = {}
 
-
     // Authenticate and get basic user data
     try {
         const auth_request = await axios.post(scoutneturl + '/api/authenticate', {
             username: req.body.username,
             password: req.body.password,
-            app_id: process.env.MIN_SPEIDING_UUID,
             app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
-        })
+        });
         req.session.user = {
             scoutnet_token: auth_request.data.token,
             app_access: [],
@@ -29,7 +28,7 @@ module.exports = async (req, res, next) => {
         }
         scoutnet_token = auth_request.data.token
     } catch (error) {
-        return res.status(401).json({ message: error.message })
+        return res.status(401).json({ step:'Authentication', message: error.message })
     }
 
     // Get user's roles
@@ -61,7 +60,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'roles', scoutnet_token, info, message: error.message })
     }
 
 
@@ -86,7 +85,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'profile', message: error.message })
     }
 
 
@@ -109,7 +108,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'memberships', message: error.message })
     }
 
     /*let flatrolesresult = []
