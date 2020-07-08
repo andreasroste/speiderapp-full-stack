@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
     let scoutnet_token = ''
     let result = {}
 
+    let authrequestglobal;
 
     // Authenticate and get basic user data
     try {
@@ -21,6 +22,7 @@ module.exports = async (req, res, next) => {
             app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
         });
+        authrequestglobal = auth_request;
         req.session.user = {
             scoutnet_token: auth_request.data.token,
             app_access: [],
@@ -34,7 +36,7 @@ module.exports = async (req, res, next) => {
 
     // Get user's roles
     let info = {
-        auth_request,
+        authrequestglobal,
         url: scoutneturl + '/api/get/user_roles',
         headers: {
             'Authorization': 'Bearer ' + scoutnet_token
