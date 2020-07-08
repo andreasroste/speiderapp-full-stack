@@ -33,6 +33,11 @@ export default new Vuex.Store({
 
       // Elementer som skal inn i sidemenyen når innlogget, uavhengig av roller.
       elements.push({
+        title: "Hjem",
+        link: "/",
+        icon: "mdi-home"
+      });
+      elements.push({
         title: "Gruppe",
         link: "/group",
         iconlink: "gruppe.png"

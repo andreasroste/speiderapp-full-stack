@@ -2,40 +2,64 @@
   <v-container>
     <h1>Profil</h1>
     <span class="text-right">
-      Fotosamtykke:
-      <v-icon v-if="photo_consent" color="green">mdi-check</v-icon>
-      <v-icon v-if="!photo_consent" color="red">mdi-close</v-icon>
     </span>
     <v-card>
       <v-card-text>
-        <v-expansion-panels v-model="contact_info_panel">
+        <!-- <v-expansion-panels v-model="contact_info_panel">
           <v-expansion-panel>
             <v-expansion-panel-header>Kontaktinformasjon</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-btn text block color="secondary" small :href="'https://min.speiding.no/organisation/user/edit_profile/' + user_member_no">Endre kontaktinfo på Min speiding</v-btn>
-              <v-list>
-                <div v-for="info in contactinfo" :key="info.id">
-                  <v-subheader>{{ info.label }}</v-subheader>
-                  <v-list-item v-if="info.field_type != 64">{{ info.value }}</v-list-item>
-                  <v-list-item v-if="info.field_type == 64">
-                    <v-icon v-if="info.value == 1" color="green">mdi-check</v-icon>
-                    <v-icon v-if="info.value != 1" color="red">mdi-close</v-icon>
-                  </v-list-item>
-                </div>
-              </v-list>
+              <v-simple-table>
+                <thead>
+                  <tr>
+                    <th>Felt</th>
+                    <th>Verdi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="info in contactinfo" :key="info.id">
+                    <td>{{ info.label }}</td>
+                    <td v-if="info.field_type != 64">{{ info.value }}</td>
+                    <td v-if="info.field_type == 64">
+                      <v-icon v-if="info.value == 1" color="green">mdi-check</v-icon>
+                      <v-icon v-if="info.value != 1" color="red">mdi-close</v-icon>
+                    </td>
+                  </tr>
+                </tbody>
+              </v-simple-table>
             </v-expansion-panel-content>
           </v-expansion-panel>
-        </v-expansion-panels>
-        <v-list>
-          <v-subheader>Medlemsnummer</v-subheader>
-          <v-list-item>{{ user_member_no }}</v-list-item>
-          <v-subheader>Navn</v-subheader>
-          <v-list-item>{{ user_full_name }}</v-list-item>
-          <v-subheader>Fødselsdato</v-subheader>
-          <v-list-item>{{ user_dob }}</v-list-item>
-          <v-subheader>E-post</v-subheader>
-          <v-list-item>{{ user_email }}</v-list-item>
-        </v-list>
+        </v-expansion-panels> -->
+        <v-simple-table>
+          <tbody>
+            <tr>
+              <td>Navn</td>
+              <td>{{ user_full_name }}</td>
+            </tr>
+            <tr>
+              <td>Medlemsnummer</td>
+              <td>{{ user_member_no }}</td>
+            </tr>
+            <tr>
+              <td>Fødselsdato</td>
+              <td>{{ user_dob }}</td>
+            </tr>
+            <tr>
+              <td>E-post</td>
+              <td>{{ user_email }}</td>
+            </tr>
+            <tr v-for="info in contactinfo" :key="info.id">
+                    <td>{{ info.label }}</td>
+                    <td v-if="info.field_type != 64">{{ info.value }}</td>
+                    <td v-if="info.field_type == 64">
+                      <v-icon v-if="info.value == 1" color="green">mdi-check</v-icon>
+                      <v-icon v-if="info.value != 1" color="red">mdi-close</v-icon>
+                    </td>
+                  </tr>
+          </tbody>
+        </v-simple-table>
+        <v-btn block color="secondary" class="mt-5" small :href="'https://min.speiding.no/organisation/user/edit_profile/' + user_member_no">Endre kontaktinfo på Min speiding</v-btn>
       </v-card-text>
     </v-card>
   </v-container>

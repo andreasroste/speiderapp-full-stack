@@ -11,14 +11,11 @@
 
             <v-tab-item key="1">
                 <v-card flat tile>
-                    <v-card-title>Denne versjonen (beta-v0.2)</v-card-title>
+                    <v-card-title>Denne versjonen (beta-v0.3)</v-card-title>
                     <v-card-text>
                         Nye funksjoner i denne versjonen:
                         <ul>
-                            <li>Om-side (den du er på nå :))</li>
-                            <li>Tabs for å bytte mellom gruppene hvis man er medlem i flere grupper.</li>
-                            <li>Enhetsmarkeringer på arrangementene</li>
-                            <li>Røde utropstegn - for å markere fare - på de som ikke har politiattesten i orden.</li>
+                            <li>Startside med snarveier basert på brukerens roller i Min speiding.</li>
                         </ul>
                     </v-card-text>
                 </v-card>
@@ -26,14 +23,10 @@
             <v-tab-item key="2">
                 <v-card flat tile>
                     <v-card-title>
-                        Neste versjon (beta-v0.3)
+                        Neste versjon (beta-v0.4)
                     </v-card-title>
                     <v-card-text>
-                        I neste versjon kan du vente deg;
-                        <ul>
-                            <li>Lista med medlemmer sorteres etter enheter og fornavn. (Det kan hende det også kommer en slags søkefunksjon)</li>
-                            <li>Endre egne personopplysninger</li>
-                        </ul>
+                        Planen for beta-v0.4 er ikke planlagt enda.
                     </v-card-text>
                 </v-card>
             </v-tab-item>

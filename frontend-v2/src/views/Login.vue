@@ -76,7 +76,7 @@ export default {
           this.$store.state.authenticated = true;
           this.$store.dispatch("populateNavDrawer");
 
-          this.$router.push("/profile");
+          this.$router.push("/");
         })
         .catch(() => {
           // Feil passord eller no

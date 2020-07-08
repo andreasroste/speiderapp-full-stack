@@ -1,6 +1,6 @@
 <template>
-	<v-container>
-		<h1>Gruppe</h1>
+	<v-container class="pa-0">
+		<h1 class="pa-3">Gruppe</h1>
 		<v-progress-circular
 			indeterminate
 			v-if="loading_site"
@@ -10,12 +10,11 @@
 		</v-alert>
 
 
-		<v-tabs center-active centered color="primary" show-arrows v-if="!loading_site && !!groupmemberships">
+		<v-tabs center-active centered show-arrows v-if="!loading_site && !!groupmemberships">
 			<v-tab v-for="group in groupmemberships" :key="group.id">{{group.name}}</v-tab>
 
 			<v-tab-item v-for="group in groupmemberships" :key="group.id">
 				<v-card tile flat>
-					<!-- <v-card-title>{{group.name}}</v-card-title> -->
 					<v-card-text>
 						<span>Du ble medlem for {{getMembershipDuration(group.confirmed_at)}}!</span><br>
 						<v-expansion-panels>
@@ -110,6 +109,9 @@
 .v-expansion-panels {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.container {
+	padding: 0 !important;
 }
 </style>
 
