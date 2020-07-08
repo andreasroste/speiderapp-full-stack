@@ -33,6 +33,14 @@ module.exports = async (req, res, next) => {
     }
 
     // Get user's roles
+    let info = {
+        auth_request,
+        url: scoutneturl + '/api/get/user_roles',
+        headers: {
+            'Authorization': 'Bearer ' + scoutnet_token
+        },
+
+    }
     try {
         const role_request = await axios.get(scoutneturl + '/api/get/user_roles', {
             headers: {
@@ -61,7 +69,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ step: 'roles', scoutnet_token, scoutneturl, message: error.message })
+        return res.status(500).json({ step: 'roles', scoutnet_token, info, message: error.message })
     }
 
 
