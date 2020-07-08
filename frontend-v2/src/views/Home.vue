@@ -104,8 +104,8 @@ export default {
           name: "Gruppeleder",
           shortcuts: [
             {type: 'int', title:"Gruppa i appen", link: '/group'},
-            {type: 'ext', title:"Gruppa i min speiding", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%'},
-            {type: 'ext', title:"Administrer medlemmer", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
+            {type: 'ext', title:"Gruppa i min speiding", link: 'https://min.speiding.no/organisation/group/home/%body_id%'},
+            {type: 'ext', title:"Administrer medlemmer", link: 'https://min.speiding.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
             {type: 'ext', title:"Informasjon om gruppedrift", link: 'https://speiding.no/grupper'}
           ]
         },
@@ -115,8 +115,8 @@ export default {
           name: 'IT-ansvarlig',
           shortcuts: [
             {type: 'int', title:"Gruppa i appen", link: '/group'},
-            {type: 'ext', title:"API-side", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_api_pane'},
-            {type: 'ext', title:"E-postlister", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_messaging_pane'}
+            {type: 'ext', title:"API-side", link: 'https://min.speiding.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_api_pane'},
+            {type: 'ext', title:"E-postlister", link: 'https://min.speiding.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_messaging_pane'}
           ]
         },
         {
@@ -125,8 +125,8 @@ export default {
           name: 'Troppsleder',
           shortcuts: [
             {type: 'int', title:"Gruppa i appen", link: '/group'},
-            {type: 'ext', title:"Administrer medlemmer", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
-            {type: 'ext', title:"Troppen i Min speiding", link: 'https://n2.test.custard.no/organisation/troop/view/%body_id%'}
+            {type: 'ext', title:"Administrer medlemmer", link: 'https://min.speiding.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
+            {type: 'ext', title:"Troppen i Min speiding", link: 'https://min.speiding.no/organisation/troop/view/%body_id%'}
           ]
         },
         {
@@ -135,8 +135,8 @@ export default {
           name: 'Troppsassistent',
           shortcuts: [
             {type: 'int', title:"Gruppa i appen", link: '/group'},
-            {type: 'ext', title:"Administrer medlemmer", link: 'https://n2.test.custard.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
-            {type: 'ext', title:"Troppen i Min speiding", link: 'https://n2.test.custard.no/organisation/troop/view/%body_id%'}
+            {type: 'ext', title:"Administrer medlemmer", link: 'https://min.speiding.no/organisation/group/home/%body_id%#viewgroup_tabmenu_tab_allmembers_pane~manage'},
+            {type: 'ext', title:"Troppen i Min speiding", link: 'https://min.speiding.no/organisation/troop/view/%body_id%'}
           ]
         },
       ]

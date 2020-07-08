@@ -6,7 +6,7 @@
         @click.stop="drawer_state = !drawer_state"
         v-if="user_full_name != ''"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title>Speiderapp</v-toolbar-title>
+      <v-toolbar-title>Norges speiderforbund</v-toolbar-title>
     </v-app-bar>
 
     <!-- Sidemeny -->

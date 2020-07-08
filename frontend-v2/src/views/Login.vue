@@ -3,7 +3,6 @@
     <h2>Velkommen!</h2>
 
     <v-alert type="warning" :value="devmode">Utviklermodus!</v-alert>
-    <v-alert type="info">08.07.2020: Hei! Vi har litt tekniske problemer med innlogging og integrasjon mot Min speiding. Vi jobber med å fikse det så fort som mulig.</v-alert>
 
     <p>Logg inn med brukernavnet og passordet du har på Min speiding.</p>
     <v-form>
