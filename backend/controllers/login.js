@@ -17,7 +17,8 @@ module.exports = async (req, res, next) => {
         const auth_request = await axios.post(scoutneturl + '/api/authenticate', {
             username: req.body.username,
             password: req.body.password,
-            app_name: 'Speiderappen (app.speiding.no',
+            app_id: process.env.MIN_SPEIDING_UUID,
+            app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
         })
         req.session.user = {
