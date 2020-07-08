@@ -2,7 +2,8 @@ const axios = require('axios')
 const Storage = require('node-storage');
 const store = new Storage('../storage.json');
 
-const scoutneturl = process.env.SCOUTNET_URL || "https://n2.test.custard.no";
+const scoutneturl = process.env.SCOUTNET_URL || "https://min.speiding.no";
+// const msuuid = process.env.MIN_SPEIDING_UUID || "etlangtogrartuttrykkmedtallbarese123";
 
 const rollbar = require('../helpers/rollbar')
 
@@ -11,18 +12,14 @@ module.exports = async (req, res, next) => {
     let scoutnet_token = ''
     let result = {}
 
-    let authrequestglobal;
-
     // Authenticate and get basic user data
     try {
         const auth_request = await axios.post(scoutneturl + '/api/authenticate', {
             username: req.body.username,
             password: req.body.password,
-            app_id: process.env.MIN_SPEIDING_UUID,
             app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
         });
-        authrequestglobal = auth_request;
         req.session.user = {
             scoutnet_token: auth_request.data.token,
             app_access: [],
@@ -35,14 +32,6 @@ module.exports = async (req, res, next) => {
     }
 
     // Get user's roles
-    let info = {
-        authrequestglobal,
-        url: scoutneturl + '/api/get/user_roles',
-        headers: {
-            'Authorization': 'Bearer ' + scoutnet_token
-        },
-
-    }
     try {
         const role_request = await axios.get(scoutneturl + '/api/get/user_roles', {
             headers: {
