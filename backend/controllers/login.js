@@ -20,8 +20,7 @@ module.exports = async (req, res, next) => {
             app_id: process.env.MIN_SPEIDING_UUID,
             app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
-        })
-        rollbar.log(auth_request, req);
+        });
         req.session.user = {
             scoutnet_token: auth_request.data.token,
             app_access: [],
@@ -62,7 +61,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ step: 'roles', message: error.message })
+        return res.status(500).json({ step: 'roles', scoutnet_token, role_request, message: error.message })
     }
 
 
