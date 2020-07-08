@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
         }
         scoutnet_token = auth_request.data.token
     } catch (error) {
-        return res.status(401).json({ message: error.message })
+        return res.status(401).json({ step:'Authentication', message: error.message })
     }
 
     // Get user's roles
@@ -62,7 +62,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'roles', message: error.message })
     }
 
 
@@ -87,7 +87,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'profile', message: error.message })
     }
 
 
@@ -110,7 +110,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ step: 'memberships', message: error.message })
     }
 
     /*let flatrolesresult = []
