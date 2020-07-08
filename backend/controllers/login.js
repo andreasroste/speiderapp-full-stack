@@ -61,7 +61,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
         rollbar.error(error, req)
-        return res.status(500).json({ step: 'roles', scoutnet_token, role_request, message: error.message })
+        return res.status(500).json({ step: 'roles', scoutnet_token, scoutneturl, message: error.message })
     }
 
 
