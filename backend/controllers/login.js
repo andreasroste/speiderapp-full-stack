@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
             app_name: 'Speiderappen (app.speiding.no)',
             device_name: req.get('user-agent')
         })
-        rollbar.log(auth_request);
+        rollbar.log(auth_request, req);
         req.session.user = {
             scoutnet_token: auth_request.data.token,
             app_access: [],
